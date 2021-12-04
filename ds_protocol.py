@@ -4,7 +4,9 @@
 
 # Replace the following placeholders with your information.
 
-
+# Li Huang
+# lhuang13@uci.edu
+# 37031681
 
 import json
 from collections import namedtuple
@@ -34,7 +36,8 @@ def extract_json(json_msg: str) -> Response:
         if type != "ok":
             raise DSProtocalException("request not ok.")
 
-        token, messages, message = None, None, None
+        token, message = None, None
+        messages = []
         if 'messages' in json_obj['response'].keys():
             messages = json_obj['response']['messages']
         elif 'message' in json_obj['response'].keys():
@@ -49,7 +52,7 @@ def extract_json(json_msg: str) -> Response:
 
 
 def to_json(send_command: str = 'join', usr: str = None, pwd: str = None,
-            token: str = '', entry: str = '', timestamp: str = '') -> str:
+            token: str = '', entry: str = '', timestamp: str = '', recipient: str = None) -> str:
     '''
     convert namedtuple to json message
 
@@ -62,7 +65,7 @@ def to_json(send_command: str = 'join', usr: str = None, pwd: str = None,
     '''
     command_map = {
         "join": {"join": {"username": usr, "password": pwd, "token": token}},
-        "directmessage": {"token": token, "directmessage": {"entry": entry, "recipient": usr, "timestamp": timestamp}},
+        "directmessage": {"token": token, "directmessage": {"entry": entry, "recipient": recipient, "timestamp": timestamp}},
         "new": {"token": token, "directmessage": "new"},
         "all": {"token": token, "directmessage": "all"}
     }
@@ -74,12 +77,3 @@ def to_json(send_command: str = 'join', usr: str = None, pwd: str = None,
 
 # def #debug(msg):
 #     print(msg)
-class Message(dict):
-    def __init__(self, entry:str = None, sender:str = None, recipient:str = None, timestamp:float = 0 ):
-        self.timestamp = timestamp
-        self.sender = sender
-        self.entry = entry
-
-        # Subclass dict to expose Post properties for serialization
-        # Don't worry about this!
-        dict.__init__(self, entry=self.entry, sender = self.sender, timestamp=self.timestamp)
