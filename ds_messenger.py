@@ -7,13 +7,14 @@ PORT = 3021
 
 class DirectMessage:
     def __init__(self, recipient: str = None, message: str = None,
-                 timestamp: float = None):
+                 timestamp: float = None, send:bool = False):
         self.recipient = recipient
         self.message = message
         self.timestamp = timestamp
+        self.send = send # is this a message send to this recipient
 
     def __repr__(self):
-        return f'recipient={self.recipient}; message={self.message}; timestamp={self.timestamp}; sender={self.sender}'
+        return f'(recipient={self.recipient}; message={self.message}; timestamp={self.timestamp}; send={self.send})'
 
 
 class DirectMessenger:
