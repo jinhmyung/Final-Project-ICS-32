@@ -7,18 +7,17 @@ PORT = 3021
 
 class DirectMessage:
     def __init__(self, recipient: str = None, message: str = None,
-                 timestamp: float = None, sender: str = None):
+                 timestamp: float = None):
         self.recipient = recipient
         self.message = message
         self.timestamp = timestamp
-        self.sender = sender
 
     def __repr__(self):
         return f'recipient={self.recipient}; message={self.message}; timestamp={self.timestamp}; sender={self.sender}'
 
 
 class DirectMessenger:
-    def __init__(self, dsuserver=None, username=None, password=None):
+    def __init__(self, dsuserver=None, username=None, password=None) -> object:
         self.token = None
         self.dsuserver = dsuserver
         self.username = username
@@ -129,9 +128,8 @@ class DirectMessenger:
             for i in range(len(recv.messages)):
                 message = DirectMessage()
                 message.message = recv.messages[i]['message']
-                message.sender = recv.messages[i]['from']
+                message.recipient= recv.messages[i]['from']
                 message.timestamp = recv.messages[i]['timestamp']
-                message.recipient = self.username
                 messages.append(message)
             if recv.type == 'ok':
                 client.close()
