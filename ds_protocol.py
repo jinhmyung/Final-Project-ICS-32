@@ -4,10 +4,6 @@
 
 # Replace the following placeholders with your information.
 
-# Li Huang
-# lhuang13@uci.edu
-# 37031681
-
 import json
 from collections import namedtuple
 import time
