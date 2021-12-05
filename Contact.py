@@ -43,6 +43,7 @@ class Profile:
                 pass
             else:
                 name.append(self._contacts[i].recipient)
+        return name
 
     def save_profile(self, path: str) -> None:
         p = Path(path)
@@ -51,12 +52,13 @@ class Profile:
             try:
                 f = open(p, 'w')
 
-                contacts = {}
+                contacts = []
                 for i in range(len(self._contacts)):
                     messages = []
                     for m in range(len(self._contacts[i].messages)):
                         messages.append(self._contacts[i].messages[m].__dict__)
-                    contacts[self._contacts[i].recipient] = messages
+                    contacts.append({'recipient': self._contacts[i].recipient,
+                                     'messages': messages})
 
                 p_dict = {
                     'dsuserver':self.dsuserver,
@@ -98,9 +100,9 @@ class Profile:
                 self.password = obj['password']
                 self.dsuserver = obj['dsuserver']
                 self.bio = obj['bio']
-                for recipient, messages in obj['contacts'].items():
-                    c = Contact(recipient)
-                    for dmsg in messages:
+                for c_obj in obj['contacts']:
+                    c = Contact(c_obj['recipient'])
+                    for dmsg in c_obj['messages']:
                         c.messages.append(DirectMessage(dmsg['recipient'], dmsg['message'],
                                           dmsg['timestamp'], dmsg['send']))
                     self._contacts.append(c)
