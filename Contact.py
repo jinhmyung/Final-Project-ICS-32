@@ -101,7 +101,7 @@ class Profile:
                 for recipient, messages in obj['contacts'].items():
                     c = Contact(recipient)
                     for dmsg in messages:
-                        c.messages.append(DirectMessage(['recipient'], dmsg['message'],
+                        c.messages.append(DirectMessage(dmsg['recipient'], dmsg['message'],
                                           dmsg['timestamp'], dmsg['send']))
                     self._contacts.append(c)
                 f.close()
