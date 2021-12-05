@@ -2,6 +2,7 @@ from ds_messenger import DirectMessage
 from Profile import Profile, Post
 import tkinter as tk
 from tkinter import ttk, filedialog
+from Contact import Contact, Profile, DsuProfileError, DsuFileError
 
 
 class Body(tk.Frame):
@@ -19,7 +20,7 @@ class Body(tk.Frame):
         self._draw()
 
     def node_select(self, event):
-        index = int(self.posts_tree.selection()[0])
+        index = int(self.contacts_tree.selection()[0])
         messages = self._contacts[index].messages
         self.set_messages(entry)
 
@@ -34,11 +35,11 @@ class Body(tk.Frame):
         self.entry_editor.delete(0.0, 'end')
         self.entry_editor.insert(0.0, text)
 
-    def set_contacts(self, posts: list):
+    def set_contacts(self, contacts: list):
         # Populates the self._contacts attribute with posts from the active DSU file.
-        self._contacts = posts
+        self._contacts = contacts
         for i in range(len(self._contacts)):
-            self._insert_post_tree(id=i, post=self._contacts[i])
+            self._insert_contacts_tree(id=i, contact=self._contacts[i])
 
     def insert_post(self, post: Post):
         # Inserts a single post to the post_tree widget.
@@ -55,32 +56,24 @@ class Body(tk.Frame):
         self.set_messages("")
         self.entry_editor.configure(state=tk.NORMAL)
         self._contacts = []
-        for item in self.posts_tree.get_children():
-            self.posts_tree.delete(item)
+        for item in self.contacts_tree.get_children():
+            self.contacts_tree.delete(item)
 
-    """
-    Inserts a post entry into the posts_tree widget.
-    """
-
-    def _insert_post_tree(self, id, post: Post):
-        entry = post.entry
+    def _insert_contacts_tree(self, id, contact:Contact):
+        recipient = contact.recipient
         # Since we don't have a title, we will use the first 24 characters of a
         # post entry as the identifier in the post_tree widget.
-        if len(entry) > 25:
-            entry = entry[:24] + "..."
+        if len(recipient) > 25:
+            recipient = recipient[:24] + "..."
 
-        self.posts_tree.insert('', id, id, text=entry)
-
-    """
-    Call only once upon initialization to add widgets to the frame
-    """
+        self.contacts_tree.insert('', id, id, text=recipient)
 
     def _draw(self):
-        posts_frame = tk.Frame(master=self, width=250)
-        posts_frame.pack(fill=tk.BOTH, side=tk.LEFT)
-        self.posts_tree = ttk.Treeview(posts_frame)
-        self.posts_tree.bind("<<TreeviewSelect>>", self.node_select)
-        self.posts_tree.pack(fill=tk.BOTH, side=tk.TOP, expand=True, padx=5, pady=5)
+        contacts_frame = tk.Frame(master=self, width=250)
+        contacts_frame.pack(fill=tk.BOTH, side=tk.LEFT)
+        self.contacts_tree = ttk.Treeview(contacts_frame)
+        self.contacts_tree.bind("<<TreeviewSelect>>", self.node_select)
+        self.contacts_tree.pack(fill=tk.BOTH, side=tk.TOP, expand=True, padx=5, pady=5)
 
         messages_frame = tk.Frame(master=self)
         messages_frame.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
@@ -134,6 +127,9 @@ class Footer(tk.Frame):
         self.footer_label.configure(text=message)
 
     def _draw(self):
+        self.footer_label = tk.Label(master=self, text="Ready.")
+        self.footer_label.pack(fill=tk.BOTH, side=tk.LEFT, padx=5)
+
         add_button = tk.Button(master=self, text="Add User", width=20)
         add_button.configure(command=self.add_click)
         add_button.pack(fill=tk.BOTH, side=tk.LEFT, padx=5, pady=5)
@@ -141,9 +137,6 @@ class Footer(tk.Frame):
         send_button = tk.Button(master=self, text="Send", width=20)
         send_button.configure(command=self.send_click)
         send_button.pack(fill=tk.BOTH, side=tk.RIGHT, padx=5, pady=5)
-
-        self.footer_label = tk.Label(master=self, text="Ready.")
-        self.footer_label.pack(fill=tk.BOTH, side=tk.LEFT, padx=5)
 
 
 class MainApp(tk.Frame):
@@ -155,11 +148,47 @@ class MainApp(tk.Frame):
 
         self._draw()
 
-    def send_message(self, message: str, recipient: str):
+    def new_profile(self):
+        filename = tk.filedialog.asksaveasfile(filetypes=[('Distributed Social Profile', '*.dsu')])
+        self._profile_filename = filename.name
+        self._current_profile = Profile()
+        self.body.reset_ui()
+        # debug(self._current_profile.keypair)
+
+    def open_profile(self):
+        """
+        Opens an existing DSU file when the 'Open' menu item is clicked and loads the profile
+        data into the UI.
+        """
+        filename = tk.filedialog.askopenfile(filetypes=[('Distributed Social Profile', '*.dsu')])
+        try:
+            self._profile_filename = filename.name
+            self._current_profile = Profile()
+            self._current_profile.load_profile(self._profile_filename)
+
+            self.body.reset_ui()
+            self.body.set_contacts(self._current_profile.get_contacts())
+        except DsuProfileError as e:
+            print(e)
+        except DsuFileError as e:
+            print(e)
+
+        # debug(self._current_profile.keypair)
+
+    def close(self):
+        """
+        Closes the program when the 'Close' menu item is clicked.
+        """
+        self.root.destroy()
+
+
+    def send_message(self):
         # send message to recipient
+        message = self.body.messages_editor.get()
+
         pass
 
-    def add_contact(self, contact: str):
+    def add_contact(self):
         # add contact to the list of contact
         pass
 
@@ -169,9 +198,9 @@ class MainApp(tk.Frame):
         self.root['menu'] = menu_bar
         menu_file = tk.Menu(menu_bar)
         menu_bar.add_cascade(menu=menu_file, label='File')
-        # menu_file.add_command(label='New', command=self.new_profile)
-        # menu_file.add_command(label='Open...', command=self.open_profile)
-        # menu_file.add_command(label='Close', command=self.close)
+        menu_file.add_command(label='New', command=self.new_profile)
+        menu_file.add_command(label='Open...', command=self.open_profile)
+        menu_file.add_command(label='Close', command=self.close)
 
         # The Body and Footer classes must be initialized and packed into the root window.
         self.body = Body(self.root, self._current_profile)
