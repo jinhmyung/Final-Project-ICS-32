@@ -31,7 +31,6 @@ class Body(tk.Frame):
         for m in messages:
             self.messages_editor.insert('end', m.message+'\n')
         self.messages_editor.config(state='disable')
-        self.set_messages(messages)
 
     def get_messages(self) -> str:
         # Returns the text that is currently displayed in the entry_editor widget.
