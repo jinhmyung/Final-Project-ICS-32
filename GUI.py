@@ -3,7 +3,8 @@ from Profile import Profile, Post
 import tkinter as tk
 from tkinter import ttk, filedialog
 from Contact import Contact, Profile, DsuProfileError, DsuFileError
-
+def debug(msg):
+    print(msg)
 
 class Body(tk.Frame):
     def __init__(self, root, select_callback=None):
@@ -13,6 +14,7 @@ class Body(tk.Frame):
 
         # a list of the Post objects available in the active DSU file
         self._contacts = []
+        self.index = None
         self._messages = []
 
         # After all initialization is complete, call the _draw method to pack the widgets
@@ -20,7 +22,8 @@ class Body(tk.Frame):
         self._draw()
 
     def node_select(self, event):
-        index = int(self.contacts_tree.selection()[0])
+        self.index= int(self.contacts_tree.selection()[0])
+        index = self.index
         messages = self._contacts[index].messages # list of DirectMessages
 
         self.messages_editor.config(state='normal')
@@ -134,12 +137,17 @@ class Footer(tk.Frame):
         self.footer_label.configure(text=message)
 
     def _draw(self):
-        self.footer_label = tk.Label(master=self, text="Ready.")
-        self.footer_label.pack(fill=tk.BOTH, side=tk.LEFT, padx=5)
+        entry_frame = tk.Frame(master=self, bg="")
+        entry_frame.pack(fill=tk.BOTH, side=tk.LEFT)
+        self.entry_editor = tk.Text(entry_frame, width=20, height=2)
+        self.entry_editor.pack(fill=tk.BOTH, side=tk.LEFT, expand=True, padx=5, pady=5)
 
-        add_button = tk.Button(master=self, text="Add User", width=20)
+        add_button = tk.Button(master=self, text="Add", width=5)
         add_button.configure(command=self.add_click)
         add_button.pack(fill=tk.BOTH, side=tk.LEFT, padx=5, pady=5)
+
+        self.footer_label = tk.Label(master=self, text="Ready.")
+        self.footer_label.pack(fill=tk.BOTH, side=tk.LEFT, padx=5)
 
         send_button = tk.Button(master=self, text="Send", width=20)
         send_button.configure(command=self.send_click)
@@ -157,7 +165,6 @@ class MainApp(tk.Frame):
 
     def new_profile(self):
         """
-
         :return:
         """
         filename = tk.filedialog.asksaveasfile(filetypes=[('Distributed Social Profile', '*.dsu')])
@@ -196,11 +203,20 @@ class MainApp(tk.Frame):
 
     def send_message(self):
         # send message to recipient
-        message = self.body.messages_editor.get()
-        pass
+        new_msg = self.body.entry_editor.get(0.0, 'end')
+
+        self.body.messages_editor.config(state='normal')
+        self.body.messages_editor.insert('end', new_msg+'\n')
+        self.body.messages_editor.config(state='disable')
+
+        new_directMessage = DirectMessage(recipient=self.body._contacts[self.body.index].recipient,
+                                           message=new_msg)
+        self.body._contacts[self.body.index].messages.append(new_directMessage)
+        self._current_profile._contacts = self.body._contacts
+        debug(self._current_profile.get_contacts_name())
+        self._current_profile.save_profile(self._profile_filename)
 
     def add_contact(self):
-        # add contact to the list of contact
         pass
 
     def _draw(self):
