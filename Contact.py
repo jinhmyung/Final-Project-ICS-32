@@ -12,7 +12,7 @@ class DsuProfileError(Exception):
 class Contact:
     def __init__(self, recipient:str):
         self.recipient = recipient
-        self.messages = []
+        self.messages = [] # DirectMessages
 
 
 class Profile:

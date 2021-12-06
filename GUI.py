@@ -22,7 +22,7 @@ class Body(tk.Frame):
     def node_select(self, event):
         index = int(self.contacts_tree.selection()[0])
         messages = self._contacts[index].messages
-        self.set_messages(entry)
+        self.set_messages(messages)
 
     def get_messages(self) -> str:
         # Returns the text that is currently displayed in the entry_editor widget.
@@ -38,6 +38,7 @@ class Body(tk.Frame):
     def set_contacts(self, contacts: list):
         # Populates the self._contacts attribute with posts from the active DSU file.
         self._contacts = contacts
+        print(self._contacts)
         for i in range(len(self._contacts)):
             self._insert_contacts_tree(id=i, contact=self._contacts[i])
 
@@ -47,12 +48,11 @@ class Body(tk.Frame):
         id = len(self._contacts) - 1  # adjust id for 0-base of treeview widget
         self._insert_post_tree(id, post)
 
-    """
-    Resets all UI widgets to their default state. Useful for when clearing the UI is neccessary such
-    as when a new DSU file is loaded, for example.
-    """
-
     def reset_ui(self):
+        """
+        Resets all UI widgets to their default state. Useful for when clearing the UI is neccessary such
+        as when a new DSU file is loaded, for example.
+        """
         self.set_messages("")
         self.entry_editor.configure(state=tk.NORMAL)
         self._contacts = []
@@ -65,7 +65,6 @@ class Body(tk.Frame):
         # post entry as the identifier in the post_tree widget.
         if len(recipient) > 25:
             recipient = recipient[:24] + "..."
-
         self.contacts_tree.insert('', id, id, text=recipient)
 
     def _draw(self):
@@ -91,11 +90,7 @@ class Body(tk.Frame):
         scroll_entry_frame.pack(fill=tk.BOTH, side=tk.RIGHT, expand=False)
 
         self.messages_editor = tk.Text(messages_frame, width=0)
-        self.messages_editor.config(state="normal")
-        self.messages_editor.insert(0.0, "message 1\n")
-        self.messages_editor.insert('end', "message 2\n")
         self.messages_editor.config(state="disable")
-        self.messages_editor.insert('end', "message 3\n")
 
         self.messages_editor.pack(fill=tk.BOTH, side=tk.LEFT, expand=True, padx=0, pady=0)
 
@@ -155,6 +150,10 @@ class MainApp(tk.Frame):
         self._draw()
 
     def new_profile(self):
+        """
+
+        :return:
+        """
         filename = tk.filedialog.asksaveasfile(filetypes=[('Distributed Social Profile', '*.dsu')])
         self._profile_filename = filename.name
         self._current_profile = Profile()
@@ -191,7 +190,6 @@ class MainApp(tk.Frame):
     def send_message(self):
         # send message to recipient
         message = self.body.messages_editor.get()
-
         pass
 
     def add_contact(self):
@@ -199,7 +197,10 @@ class MainApp(tk.Frame):
         pass
 
     def _draw(self):
-        # Build a menu and add it to the root frame.
+        """
+        Build a menu and add it to the root frame.
+        :return:
+        """
         menu_bar = tk.Menu(self.root)
         self.root['menu'] = menu_bar
         menu_file = tk.Menu(menu_bar)

@@ -6,6 +6,7 @@ user2 = 'll7'
 pwd1 = '1000'
 pwd2 = '0000'
 
+
 class TestSend(unittest.TestCase):
     def test_send_directmessage(self):
         global server, user1, user2, pwd1, pwd2

@@ -1,7 +1,4 @@
 ### A sample code to see how Contact works
-
-
-
 from Contact import Profile, Contact
 from ds_messenger import DirectMessage
 import time
@@ -12,7 +9,6 @@ pwd2 = '0000'
 path = input()
 
 ll7 = Profile(server, user2, pwd2)
-
 
 # message sent
 msg1 = DirectMessage(message='msgA1', recipient='userA',timestamp=time.time(), send=True)
