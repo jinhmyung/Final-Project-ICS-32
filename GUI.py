@@ -43,7 +43,7 @@ class Body(tk.Frame):
         if send:
             self.messages_editor.insert(index, 'Me:\n   '+msg+'\n')
         else:
-            self.messages_editor.insert(index, self._contacts[self.index].recipient + ':\n  '+ msg + '\n')
+            self.messages_editor.insert(index, self._contacts[self.index].recipient + ':\n    '+ msg + '\n')
         self.messages_editor.config(state='disable')
 
     def get_messages(self) -> str:
@@ -218,7 +218,7 @@ class MainApp(tk.Frame):
         self.body.insert_messages(new_msg, send=True)
 
         # send message to recipient
-        self.publish(new_msg)
+        # self.publish(new_msg)
 
         # save the new_msg as DirectMessage to the Profile
         new_directMessage = DirectMessage(recipient=self.body._contacts[self.body.index].recipient,
@@ -241,11 +241,22 @@ class MainApp(tk.Frame):
         self.body.set_contacts(self._current_profile.get_contacts())
 
     def check_new_messages(self): # Li
-        messenger = DirectMessenger(self._current_profile.dsuserver, self._current_profile.username,
-                                    self._current_profile.password)
-        new_msgs = messenger.retrieve_new()
-        end = len(new_msgs)
+        if self._current_profile is None:
+            pass
+        else:
+            try:
+                debug('! new message check')
+                messenger = DirectMessenger(self._current_profile.dsuserver, self._current_profile.username,
+                                            self._current_profile.password)
+                new_msgs = messenger.retrieve_new()
+                for m in new_msgs:
+                    self.body.insert_messages(m.message)
+                    self._current_profile._contacts[self.body.index].messages.append(m)
+                self._current_profile.save_profile(self._profile_filename)
+            except TypeError as e:
+                print(e)
 
+        self.root.after(5000, self.check_new_messages)
 
     def _draw(self):
         """
@@ -289,7 +300,7 @@ if __name__ == "__main__":
     # Initialize the MainApp class, which is the starting point for the widgets used in the program.
     # All of the classes that we use, subclass Tk.Frame, since our root frame is main, we initialize
     # the class with it.
-    MainApp(main)
+    app = MainApp(main)
 
     # When update is called, we finalize the states of all widgets that have been configured within the root frame.
     # Here, Update ensures that we get an accurate width and height reading based on the types of widgets
@@ -298,5 +309,7 @@ if __name__ == "__main__":
     # the resizing behavior of the window changes.
     main.update()
     main.minsize(main.winfo_width(), main.winfo_height())
+
+    main.after(ms=5000, func=app.check_new_messages) # check messages every 5 seconds
     # And finally, start up the event loop for the program (more on this in lecture).
     main.mainloop()
