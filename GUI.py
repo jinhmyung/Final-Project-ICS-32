@@ -1,4 +1,4 @@
-from ds_messenger import DirectMessage
+from ds_messenger import DirectMessage, DirectMessenger
 from Profile import Profile, Post
 import tkinter as tk
 from tkinter import ttk, filedialog
@@ -200,21 +200,29 @@ class MainApp(tk.Frame):
         """
         self.root.destroy()
 
-
     def send_message(self):
-        # send message to recipient
-        new_msg = self.body.entry_editor.get(0.0, 'end')
+        # send to the message_editor to displace it
+        new_msg = self.body.entry_editor.get(0.0, 'end').strip()
 
         self.body.messages_editor.config(state='normal')
         self.body.messages_editor.insert('end', new_msg+'\n')
         self.body.messages_editor.config(state='disable')
 
+        # send message to recipient
+        self.publish(new_msg)
+
+        # save the new_msg as DirectMessage to the Profile
         new_directMessage = DirectMessage(recipient=self.body._contacts[self.body.index].recipient,
-                                           message=new_msg)
+                                          message=new_msg, send=True)
         self.body._contacts[self.body.index].messages.append(new_directMessage)
         self._current_profile._contacts = self.body._contacts
         debug(self._current_profile.get_contacts_name())
         self._current_profile.save_profile(self._profile_filename)
+
+    def publish(self, new_msg):
+        messenger = DirectMessenger(self._current_profile.dsuserver, self._current_profile.username,
+                                    self._current_profile.password)
+        messenger.send(message=new_msg, recipient=self.body._contacts[self.body.index].recipient)
 
     def add_contact(self): ####Jin
         new_contact = self.footer.entry_editor.get(0.0, 'end')
@@ -223,6 +231,11 @@ class MainApp(tk.Frame):
         self.body.reset_ui()
         self.body.set_contacts(self._current_profile.get_contacts())
 
+    def check_new_messages(self): # Li
+        messenger = DirectMessenger(self._current_profile.dsuserver, self._current_profile.username,
+                                    self._current_profile.password)
+        new_msgs = messenger.retrieve_new()
+        end = len(new_msgs)
 
 
     def _draw(self):
