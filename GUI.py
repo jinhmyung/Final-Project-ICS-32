@@ -91,6 +91,12 @@ class Body(tk.Frame):
         scroll_entry_frame.pack(fill=tk.BOTH, side=tk.RIGHT, expand=False)
 
         self.messages_editor = tk.Text(messages_frame, width=0)
+        self.messages_editor.config(state="normal")
+        self.messages_editor.insert(0.0, "message 1\n")
+        self.messages_editor.insert('end', "message 2\n")
+        self.messages_editor.config(state="disable")
+        self.messages_editor.insert('end', "message 3\n")
+
         self.messages_editor.pack(fill=tk.BOTH, side=tk.LEFT, expand=True, padx=0, pady=0)
 
         self.entry_editor = tk.Text(editor_frame, width=0, height=6)
