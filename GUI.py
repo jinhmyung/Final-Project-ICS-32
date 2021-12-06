@@ -216,8 +216,14 @@ class MainApp(tk.Frame):
         debug(self._current_profile.get_contacts_name())
         self._current_profile.save_profile(self._profile_filename)
 
-    def add_contact(self):
-        pass
+    def add_contact(self): ####Jin
+        new_contact = self.footer.entry_editor.get(0.0, 'end')
+        self._current_profile._contacts.append(Contact(new_contact.strip()))
+        self._current_profile.save_profile(self._profile_filename)
+        self.body.reset_ui()
+        self.body.set_contacts(self._current_profile.get_contacts())
+
+
 
     def _draw(self):
         """
