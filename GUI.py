@@ -26,23 +26,34 @@ class Body(tk.Frame):
         index = self.index
         messages = self._contacts[index].messages # list of DirectMessages
 
-        self.messages_editor.config(state='normal')
-        self.messages_editor.delete(0.0, 'end')
+        self.delete_messages()
         for m in messages:
-            self.messages_editor.insert('end', m.message+'\n')
+            self.insert_messages(m.message, send = m.send)
+
+    def insert_messages(self, msg:str, index='end', send=False):
+        """
+        insert messages msg to the message editor
+        :param index: where to insert
+        :param msg: message to be sent
+        :param send: whether the msg is send to the recipient
+        :return:
+        """
+        msg = msg.strip()
+        self.messages_editor.config(state='normal')
+        if send:
+            self.messages_editor.insert(index, 'Me:\n   '+msg+'\n')
+        else:
+            self.messages_editor.insert(index, self._contacts[self.index].recipient + ':\n  '+ msg + '\n')
         self.messages_editor.config(state='disable')
-        self.set_messages(messages)
 
     def get_messages(self) -> str:
         # Returns the text that is currently displayed in the entry_editor widget.
         return self.entry_editor.get('1.0', 'end').rstrip()
 
-    def set_messages(self, text: str):
-        # Sets the text to be displayed in the messages_editor widget.
-        # TODO: Write code to that deletes all current text in the self.messages_editor widget
-        # and inserts the value contained within the text parameter.
+    def delete_messages(self):
+        self.messages_editor.config(state='normal')
         self.messages_editor.delete(0.0, 'end')
-        self.messages_editor.insert(0.0, text)
+        self.messages_editor.config(state='disable')
 
     def set_contacts(self, contacts: list):
         # Populates the self._contacts attribute with posts from the active DSU file.
@@ -51,18 +62,18 @@ class Body(tk.Frame):
         for i in range(len(self._contacts)):
             self._insert_contacts_tree(id=i, contact=self._contacts[i])
 
-    def insert_post(self, post: Post):
-        # Inserts a single post to the post_tree widget.
-        self._contacts.append(post)
-        id = len(self._contacts) - 1  # adjust id for 0-base of treeview widget
-        self._insert_post_tree(id, post)
+    # def insert_post(self, post: Post):
+    #     # Inserts a single post to the post_tree widget.
+    #     self._contacts.append(post)
+    #     id = len(self._contacts) - 1  # adjust id for 0-base of treeview widget
+    #     self._insert_post_tree(id, post)
 
     def reset_ui(self):
         """
         Resets all UI widgets to their default state. Useful for when clearing the UI is neccessary such
         as when a new DSU file is loaded, for example.
         """
-        self.set_messages("")
+        self.delete_messages()
         self.entry_editor.configure(state=tk.NORMAL)
         self._contacts = []
         for item in self.contacts_tree.get_children():
@@ -204,9 +215,7 @@ class MainApp(tk.Frame):
         # send to the message_editor to displace it
         new_msg = self.body.entry_editor.get(0.0, 'end').strip()
 
-        self.body.messages_editor.config(state='normal')
-        self.body.messages_editor.insert('end', new_msg+'\n')
-        self.body.messages_editor.config(state='disable')
+        self.body.insert_messages(new_msg, send=True)
 
         # send message to recipient
         self.publish(new_msg)
