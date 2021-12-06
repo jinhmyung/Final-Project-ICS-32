@@ -21,7 +21,13 @@ class Body(tk.Frame):
 
     def node_select(self, event):
         index = int(self.contacts_tree.selection()[0])
-        messages = self._contacts[index].messages
+        messages = self._contacts[index].messages # list of DirectMessages
+
+        self.messages_editor.config(state='normal')
+        self.messages_editor.delete(0.0, 'end')
+        for m in messages:
+            self.messages_editor.insert('end', m.message+'\n')
+        self.messages_editor.config(state='disable')
         self.set_messages(messages)
 
     def get_messages(self) -> str:
@@ -29,11 +35,11 @@ class Body(tk.Frame):
         return self.entry_editor.get('1.0', 'end').rstrip()
 
     def set_messages(self, text: str):
-        # Sets the text to be displayed in the entry_editor widget.
-        # TODO: Write code to that deletes all current text in the self.entry_editor widget
+        # Sets the text to be displayed in the messages_editor widget.
+        # TODO: Write code to that deletes all current text in the self.messages_editor widget
         # and inserts the value contained within the text parameter.
-        self.entry_editor.delete(0.0, 'end')
-        self.entry_editor.insert(0.0, text)
+        self.messages_editor.delete(0.0, 'end')
+        self.messages_editor.insert(0.0, text)
 
     def set_contacts(self, contacts: list):
         # Populates the self._contacts attribute with posts from the active DSU file.
@@ -173,6 +179,7 @@ class MainApp(tk.Frame):
 
             self.body.reset_ui()
             self.body.set_contacts(self._current_profile.get_contacts())
+
         except DsuProfileError as e:
             print(e)
         except DsuFileError as e:

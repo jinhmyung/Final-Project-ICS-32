@@ -15,6 +15,8 @@ class Contact:
         self.messages = [] # DirectMessages
 
 
+
+
 class Profile:
     def __init__(self, dsuserver=None, username=None, password=None):
         self.dsuserver = dsuserver  # REQUIRED
