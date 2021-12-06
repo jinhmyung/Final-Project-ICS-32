@@ -157,7 +157,6 @@ class MainApp(tk.Frame):
 
     def new_profile(self):
         """
-
         :return:
         """
         filename = tk.filedialog.asksaveasfile(filetypes=[('Distributed Social Profile', '*.dsu')])
@@ -196,8 +195,11 @@ class MainApp(tk.Frame):
 
     def send_message(self):
         # send message to recipient
-        message = self.body.messages_editor.get()
-        pass
+        self.body.messages_editor.insert(self.body.entry_editor.get())
+        self._contacts
+        
+
+        
 
     def add_contact(self):
         # add contact to the list of contact
