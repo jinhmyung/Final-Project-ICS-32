@@ -14,7 +14,8 @@ class Contact:
         self.recipient = recipient
         self.messages = [] # DirectMessages
 
-
+    def sort_messages(self):
+        self.messages.sort(key=lambda DirectMessage: DirectMessage.timestamp)
 
 
 class Profile:
@@ -61,7 +62,6 @@ class Profile:
                         messages.append(self._contacts[i].messages[m].__dict__)
                     contacts.append({'recipient': self._contacts[i].recipient,
                                      'messages': messages})
-
                 p_dict = {
                     'dsuserver':self.dsuserver,
                     'username': self.username,
@@ -107,7 +107,9 @@ class Profile:
                     for dmsg in c_obj['messages']:
                         c.messages.append(DirectMessage(dmsg['recipient'], dmsg['message'],
                                           dmsg['timestamp'], dmsg['send']))
+                    c.sort_messages()
                     self._contacts.append(c)
+
                 f.close()
             except Exception as ex:
                 raise DsuProfileError(ex)
