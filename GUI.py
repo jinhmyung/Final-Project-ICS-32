@@ -1,10 +1,13 @@
-from ds_messenger import DirectMessage
+from ds_messenger import DirectMessage, DirectMessenger
 from Profile import Profile, Post
 import tkinter as tk
 from tkinter import ttk, filedialog
 from Contact import Contact, Profile, DsuProfileError, DsuFileError
+
+
 def debug(msg):
     print(msg)
+
 
 class Body(tk.Frame):
     def __init__(self, root, select_callback=None):
@@ -22,26 +25,38 @@ class Body(tk.Frame):
         self._draw()
 
     def node_select(self, event):
-        self.index= int(self.contacts_tree.selection()[0])
+        self.index = int(self.contacts_tree.selection()[0])
         index = self.index
-        messages = self._contacts[index].messages # list of DirectMessages
+        messages = self._contacts[index].messages  # list of DirectMessages
 
-        self.messages_editor.config(state='normal')
-        self.messages_editor.delete(0.0, 'end')
+        self.delete_messages()
         for m in messages:
-            self.messages_editor.insert('end', m.message+'\n')
+            self.insert_messages(m.message, send=m.send)
+
+    def insert_messages(self, msg: str, index='end', send=False):
+        """
+        insert messages msg to the message editor
+        :param index: where to insert
+        :param msg: message to be sent
+        :param send: whether the msg is send to the recipient
+        :return:
+        """
+        msg = msg.strip()
+        self.messages_editor.config(state='normal')
+        if send:
+            self.messages_editor.insert(index, 'Me:\n   ' + msg + '\n')
+        else:
+            self.messages_editor.insert(index, self._contacts[self.index].recipient + ':\n    ' + msg + '\n')
         self.messages_editor.config(state='disable')
 
     def get_messages(self) -> str:
         # Returns the text that is currently displayed in the entry_editor widget.
         return self.entry_editor.get('1.0', 'end').rstrip()
 
-    def set_messages(self, text: str):
-        # Sets the text to be displayed in the messages_editor widget.
-        # TODO: Write code to that deletes all current text in the self.messages_editor widget
-        # and inserts the value contained within the text parameter.
+    def delete_messages(self):
+        self.messages_editor.config(state='normal')
         self.messages_editor.delete(0.0, 'end')
-        self.messages_editor.insert(0.0, text)
+        self.messages_editor.config(state='disable')
 
     def set_contacts(self, contacts: list):
         # Populates the self._contacts attribute with posts from the active DSU file.
@@ -50,24 +65,24 @@ class Body(tk.Frame):
         for i in range(len(self._contacts)):
             self._insert_contacts_tree(id=i, contact=self._contacts[i])
 
-    def insert_post(self, post: Post):
-        # Inserts a single post to the post_tree widget.
-        self._contacts.append(post)
-        id = len(self._contacts) - 1  # adjust id for 0-base of treeview widget
-        self._insert_post_tree(id, post)
+    # def insert_post(self, post: Post):
+    #     # Inserts a single post to the post_tree widget.
+    #     self._contacts.append(post)
+    #     id = len(self._contacts) - 1  # adjust id for 0-base of treeview widget
+    #     self._insert_post_tree(id, post)
 
     def reset_ui(self):
         """
         Resets all UI widgets to their default state. Useful for when clearing the UI is neccessary such
         as when a new DSU file is loaded, for example.
         """
-        self.set_messages("")
+        self.delete_messages()
         self.entry_editor.configure(state=tk.NORMAL)
         self._contacts = []
         for item in self.contacts_tree.get_children():
             self.contacts_tree.delete(item)
 
-    def _insert_contacts_tree(self, id, contact:Contact):
+    def _insert_contacts_tree(self, id, contact: Contact):
         recipient = contact.recipient
         # Since we don't have a title, we will use the first 24 characters of a
         # post entry as the identifier in the post_tree widget.
@@ -120,9 +135,10 @@ class Footer(tk.Frame):
         self.root = root
         self._send_callback = send_callback
         self._add_callback = add_callback
+        self.dm_mode = False
+        self._draw()
         # After all initialization is complete, call the _draw method to pack the widgets
         # into the Footer instance
-        self._draw()
 
     def send_click(self):
         if self._send_callback is not None:
@@ -131,6 +147,26 @@ class Footer(tk.Frame):
     def add_click(self):
         if self._add_callback is not None:
             self._add_callback()
+
+    def DM_click(self):
+        if self.dm_mode == False:
+            self.dm_mode = True
+        else:
+            self.dm_mode = False
+        if self.dm_mode == False or None:
+            self.configure(background='white')
+            self.entry_editor.configure(background='white')
+            app.body.messages_editor.configure(background='white')
+            app.body.entry_editor.configure(background='white')
+            app.body.contacts_tree.configure(background='white')
+
+
+        else:
+            self.configure(background='gray')
+            app.body.entry_editor.configure(background='gray')
+            app.body.messages_editor.configure(background='gray')
+            self.entry_editor.configure(background='gray')
+            app.body.contacts_tree.configure(background='orange')
 
     def set_status(self, message):
         self.footer_label.configure(text=message)
@@ -144,6 +180,10 @@ class Footer(tk.Frame):
         add_button = tk.Button(master=self, text="Add", width=5)
         add_button.configure(command=self.add_click)
         add_button.pack(fill=tk.BOTH, side=tk.LEFT, padx=5, pady=5)
+
+        # DM_button = tk.Button(master=self, text="DarkMode", width=5)
+        # DM_button.configure(command=self.DM_click)
+        # DM_button.pack(fill=tk.BOTH, side=tk.TOP, padx=5, pady=5)
 
         self.footer_label = tk.Label(master=self, text="Ready.")
         self.footer_label.pack(fill=tk.BOTH, side=tk.LEFT, padx=5)
@@ -159,7 +199,7 @@ class MainApp(tk.Frame):
         self.root = root
         self._profile_filename = None
         self._current_profile = Profile()
-
+        self.dm_mode = False
         self._draw()
 
     def new_profile(self):
@@ -199,24 +239,92 @@ class MainApp(tk.Frame):
         """
         self.root.destroy()
 
-
     def send_message(self):
+        """
+        send the new messages in the entry_editor to display in the screen and to the server
+        """
+        new_msg = self.body.entry_editor.get(0.0, 'end').strip()
+
+        self.body.insert_messages(new_msg, send=True)
+
         # send message to recipient
-        new_msg = self.body.entry_editor.get(0.0, 'end')
+        published = self.publish(new_msg)
+        if not published:
+            self.footer.set_status('Message not sent to the server')
+        else:
+            self.footer.set_status('Message sent')
 
-        self.body.messages_editor.config(state='normal')
-        self.body.messages_editor.insert('end', new_msg+'\n')
-        self.body.messages_editor.config(state='disable')
-
+        # save the new_msg as DirectMessage to the Profile
         new_directMessage = DirectMessage(recipient=self.body._contacts[self.body.index].recipient,
-                                           message=new_msg)
+                                          message=new_msg, send=True)
         self.body._contacts[self.body.index].messages.append(new_directMessage)
         self._current_profile._contacts = self.body._contacts
         debug(self._current_profile.get_contacts_name())
         self._current_profile.save_profile(self._profile_filename)
 
-    def add_contact(self):
-        pass
+    def publish(self, new_msg:str) -> bool:
+        """
+        publish new_msg to the server, return False if failed else True
+        """
+        messenger = DirectMessenger(self._current_profile.dsuserver, self._current_profile.username,
+                                    self._current_profile.password)
+        return messenger.send(message=new_msg, recipient=self.body._contacts[self.body.index].recipient)
+
+    def add_contact(self):  ####Jin
+        """
+        add the input in the entry_editor to the Contacts list and save profile
+        """
+        new_contact = self.footer.entry_editor.get(0.0, 'end')
+        self._current_profile._contacts.append(Contact(new_contact.strip()))
+        self._current_profile.save_profile(self._profile_filename)
+        self.body.reset_ui()
+        self.body.set_contacts(self._current_profile.get_contacts())
+
+    def check_new_messages(self):  # Li
+        """
+        check whether there is new messages
+        """
+        if self._current_profile is None:
+            pass
+        else:
+            try:
+                debug('! new message check')
+                messenger = DirectMessenger(self._current_profile.dsuserver, self._current_profile.username,
+                                            self._current_profile.password)
+                new_msgs = messenger.retrieve_new()
+                for m in new_msgs:
+                    self.body.insert_messages(m.message)
+                    self._current_profile._contacts[self.body.index].messages.append(m)
+                self._current_profile.save_profile(self._profile_filename)
+            except TypeError:
+                return None
+
+        self.root.after(5000, self.check_new_messages)
+
+    def DM_click(self):
+        if self.dm_mode == False:
+            self.dm_mode = True
+        else:
+            self.dm_mode = False
+        if self.dm_mode == False or None:
+            app.footer.configure(background='white')
+            app.footer.entry_editor.configure(background='white')
+            app.footer.footer_label.configure(background='white')
+            app.body.messages_editor.configure(background='white')
+            app.body.entry_editor.configure(background='white')
+            # app.body.contacts_tree.configure("Treeview", background = 'white', fieldbackground="white", foreground="white") #doesnt work
+            ttk.Style(main).configure("Treeview", background="white", fieldbackground="white", foreground="white")
+            # app.body.configure(background = 'white')
+        else:
+            app.footer.configure(background='gray')
+            app.body.entry_editor.configure(background='gray')
+            app.footer.footer_label.configure(background='gray')
+            app.body.messages_editor.configure(background='gray')
+            app.footer.entry_editor.configure(background='gray')
+            # app.body.contacts_tree.configure("Treeview", background='gray', fieldbackground="gray", foreground="gray")
+            ttk.Style(main).configure("Treeview", background="gray", fieldbackground="gray",
+                                      foreground="gray")  # doesnt work
+            # app.body.configure(background = 'gray')
 
     def _draw(self):
         """
@@ -230,6 +338,7 @@ class MainApp(tk.Frame):
         menu_file.add_command(label='New', command=self.new_profile)
         menu_file.add_command(label='Open...', command=self.open_profile)
         menu_file.add_command(label='Close', command=self.close)
+        menu_file.add_command(label='DarkMode', command=self.DM_click)
 
         # The Body and Footer classes must be initialized and packed into the root window.
         self.body = Body(self.root, self._current_profile)
@@ -260,7 +369,7 @@ if __name__ == "__main__":
     # Initialize the MainApp class, which is the starting point for the widgets used in the program.
     # All of the classes that we use, subclass Tk.Frame, since our root frame is main, we initialize
     # the class with it.
-    MainApp(main)
+    app = MainApp(main)
 
     # When update is called, we finalize the states of all widgets that have been configured within the root frame.
     # Here, Update ensures that we get an accurate width and height reading based on the types of widgets
@@ -269,5 +378,7 @@ if __name__ == "__main__":
     # the resizing behavior of the window changes.
     main.update()
     main.minsize(main.winfo_width(), main.winfo_height())
+
+    main.after(ms=5000, func=app.check_new_messages)  # check messages every 5 seconds
     # And finally, start up the event loop for the program (more on this in lecture).
     main.mainloop()
