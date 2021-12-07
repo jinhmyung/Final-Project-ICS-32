@@ -18,6 +18,9 @@ class DirectMessage:
 
 
 class DirectMessenger:
+    '''
+    initalize attributes to send a direct message to a recipient
+    '''
     def __init__(self, dsuserver=None, username=None, password=None) -> object:
         self.token = None
         self.dsuserver = dsuserver
@@ -71,7 +74,9 @@ class DirectMessenger:
             return messages
 
     def retrieve_all(self) -> list:
-        # returns a list of DirectMessage objects containing all messages
+        '''
+        returns a list of DirectMessage objects containing all messages (new and old)
+        '''
         messages = self._retrieve('all')
         if messages is None:
             return []
@@ -114,6 +119,10 @@ class DirectMessenger:
         return True
 
     def _retrieve(self, command: str = 'all'):
+        '''
+        connect the client to the server to retrieve direct messages
+        :return message
+        '''
         messages = []
 
         client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
