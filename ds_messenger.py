@@ -4,14 +4,30 @@ import ds_protocol
 
 PORT = 3021
 
-
 class DirectMessage:
+    """
+    class for DirectMessage that contain information regarding a message
+
+    attributes:
+        recipient: username of the person that receive or send this message
+        message: str of message
+        timestamp: the time this is create
+        send: whether the message is send to the recipient
+    """
+    recipient = None
+    message = None
+    timestamp = None
+    send = None
+
     def __init__(self, recipient: str = None, message: str = None,
                  timestamp: float = None, send:bool = False):
         self.recipient = recipient
         self.message = message
         self.timestamp = timestamp
         self.send = send # is this a message send to this recipient
+
+        if self.timestamp is None:
+            self.timestamp = time.time()
 
     def __repr__(self):
         return f'(recipient={self.recipient}; message={self.message}; timestamp={self.timestamp}; send={self.send})'
