@@ -93,7 +93,7 @@ class Body(tk.Frame):
     def _draw(self):
         contacts_frame = tk.Frame(master=self, width=250)
         contacts_frame.pack(fill=tk.BOTH, side=tk.LEFT)
-        self.contacts_tree = ttk.Treeview(contacts_frame)
+        self.contacts_tree = ttk.Treeview(contacts_frame, style='Treeview')
         self.contacts_tree.bind("<<TreeviewSelect>>", self.node_select)
         self.contacts_tree.pack(fill=tk.BOTH, side=tk.TOP, expand=True, padx=5, pady=5)
 
@@ -148,26 +148,6 @@ class Footer(tk.Frame):
         if self._add_callback is not None:
             self._add_callback()
 
-    def DM_click(self):
-        if self.dm_mode == False:
-            self.dm_mode = True
-        else:
-            self.dm_mode = False
-        if self.dm_mode == False or None:
-            self.configure(background='white')
-            self.entry_editor.configure(background='white')
-            app.body.messages_editor.configure(background='white')
-            app.body.entry_editor.configure(background='white')
-            app.body.contacts_tree.configure(background='white')
-
-
-        else:
-            self.configure(background='gray')
-            app.body.entry_editor.configure(background='gray')
-            app.body.messages_editor.configure(background='gray')
-            self.entry_editor.configure(background='gray')
-            app.body.contacts_tree.configure(background='orange')
-
     def set_status(self, message):
         self.footer_label.configure(text=message)
 
@@ -180,10 +160,6 @@ class Footer(tk.Frame):
         add_button = tk.Button(master=self, text="Add", width=5)
         add_button.configure(command=self.add_click)
         add_button.pack(fill=tk.BOTH, side=tk.LEFT, padx=5, pady=5)
-
-        # DM_button = tk.Button(master=self, text="DarkMode", width=5)
-        # DM_button.configure(command=self.DM_click)
-        # DM_button.pack(fill=tk.BOTH, side=tk.TOP, padx=5, pady=5)
 
         self.footer_label = tk.Label(master=self, text="Ready.")
         self.footer_label.pack(fill=tk.BOTH, side=tk.LEFT, padx=5)
@@ -262,7 +238,7 @@ class MainApp(tk.Frame):
         debug(self._current_profile.get_contacts_name())
         self._current_profile.save_profile(self._profile_filename)
 
-    def publish(self, new_msg:str) -> bool:
+    def publish(self, new_msg: str) -> bool:
         """
         publish new_msg to the server, return False if failed else True
         """
@@ -306,31 +282,46 @@ class MainApp(tk.Frame):
             self.dm_mode = True
         else:
             self.dm_mode = False
+
+        style = ttk.Style()
+
         if self.dm_mode == False or None:
+            style.theme_use('clam')
+            style.configure('Treeview', background='white',
+                            fieldbackground='white',
+                            foreground='black')
+            style.map('Treeview',
+                      background=[("selected", "#AAAADD")],
+                      foreground=[("selected", "#222222")])
             app.footer.configure(background='white')
             app.footer.entry_editor.configure(background='white')
             app.footer.footer_label.configure(background='white')
             app.body.messages_editor.configure(background='white')
             app.body.entry_editor.configure(background='white')
             # app.body.contacts_tree.configure("Treeview", background = 'white', fieldbackground="white", foreground="white") #doesnt work
-            ttk.Style(main).configure("Treeview", background="white", fieldbackground="white", foreground="white")
+            # ttk.Style(main).configure("Treeview", background="white", fieldbackground="white", foreground="white")
             # app.body.configure(background = 'white')
         else:
-            app.footer.configure(background='gray')
-            app.body.entry_editor.configure(background='gray')
-            app.footer.footer_label.configure(background='gray')
-            app.body.messages_editor.configure(background='gray')
-            app.footer.entry_editor.configure(background='gray')
-            # app.body.contacts_tree.configure("Treeview", background='gray', fieldbackground="gray", foreground="gray")
-            ttk.Style(main).configure("Treeview", background="gray", fieldbackground="gray",
-                                      foreground="gray")  # doesnt work
-            # app.body.configure(background = 'gray')
+            style.theme_use('clam')
+            style.configure('Treeview',background='#333333',
+                            fieldbackground='#333333',
+                            foreground='#FFFFFF')
+            style.map('Treeview',
+                      background=[("selected", "#666699")],
+                      foreground=[("selected", "#FFFFFF")])
+            app.footer.configure(background='#333333')
+            app.body.entry_editor.configure(background='#333333')
+            app.footer.footer_label.configure(background='#333333')
+            app.body.messages_editor.configure(background='#333333')
+            app.footer.entry_editor.configure(background='#333333')
+            app.body.configure(background = '#333333')
 
     def _draw(self):
         """
         Build a menu and add it to the root frame.
         :return:
         """
+
         menu_bar = tk.Menu(self.root)
         self.root['menu'] = menu_bar
         menu_file = tk.Menu(menu_bar)
@@ -338,7 +329,8 @@ class MainApp(tk.Frame):
         menu_file.add_command(label='New', command=self.new_profile)
         menu_file.add_command(label='Open...', command=self.open_profile)
         menu_file.add_command(label='Close', command=self.close)
-        menu_file.add_command(label='DarkMode', command=self.DM_click)
+
+        menu_bar.add_command(label='Dark Mode', command=self.DM_click)
 
         # The Body and Footer classes must be initialized and packed into the root window.
         self.body = Body(self.root, self._current_profile)
