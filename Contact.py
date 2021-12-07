@@ -10,16 +10,33 @@ class DsuProfileError(Exception):
 
 
 class Contact:
+    '''
+    class that store the messages and name of a contact
+    
+    attributes:
+        recipient: name of the recipient
+        messages: a list of DirectMessage
+    '''
     def __init__(self, recipient:str):
+        '''
+        This is a class for initializing the attributes of a contact and a message
+        '''
         self.recipient = recipient
-        self.messages = [] # DirectMessages
+        self.messages = [] # list of DirectMessages
 
     def sort_messages(self):
+        """
+        sort the messages according to the timestamp
+        """
         self.messages.sort(key=lambda DirectMessage: DirectMessage.timestamp)
 
 
 class Profile:
     def __init__(self, dsuserver=None, username=None, password=None):
+        '''
+        This class seeks to initalize variables for the send function
+        and assigns attributes to a location
+        '''
         self.dsuserver = dsuserver  # REQUIRED
         self.username = username  # REQUIRED
         self.password = password  # REQUIRED
@@ -49,6 +66,9 @@ class Profile:
         return name
 
     def save_profile(self, path: str) -> None:
+        '''
+        Save attributes of a user-created profile in a DSU file
+        '''
         p = Path(path)
 
         if os.path.exists(p) and p.suffix == '.dsu':
@@ -91,6 +111,9 @@ class Profile:
     """
 
     def load_profile(self, path: str) -> None:
+        '''
+        Load an already existing DSU file with attributes initalized in Profile class
+        '''
         p = Path(path)
 
         if os.path.exists(p) and p.suffix == '.dsu':

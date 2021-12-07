@@ -4,8 +4,16 @@ import ds_protocol
 
 PORT = 3021
 
-
 class DirectMessage:
+    """
+    class for DirectMessage that contain information regarding a message
+
+    attributes:
+        recipient: username of the person that receive or send this message
+        message: str of message
+        timestamp: the time this is create
+        send: whether the message is send to the recipient
+    """
     recipient = None
     message = None
     timestamp = None
@@ -26,6 +34,9 @@ class DirectMessage:
 
 
 class DirectMessenger:
+    '''
+    initalize attributes to send a direct message to a recipient
+    '''
     def __init__(self, dsuserver=None, username=None, password=None) -> object:
         self.token = None
         self.dsuserver = dsuserver
@@ -79,7 +90,9 @@ class DirectMessenger:
             return messages
 
     def retrieve_all(self) -> list:
-        # returns a list of DirectMessage objects containing all messages
+        '''
+        returns a list of DirectMessage objects containing all messages (new and old)
+        '''
         messages = self._retrieve('all')
         if messages is None:
             return []
@@ -102,8 +115,6 @@ class DirectMessenger:
             print('Connection time out, please try again or change the server or the port number')
             client.close()
             return False
-        except OSError as e: # in case no connect
-            return False
         else:
             print('client connected to {} on {}'.format(self.dsuserver, PORT))
 
@@ -124,6 +135,10 @@ class DirectMessenger:
         return True
 
     def _retrieve(self, command: str = 'all'):
+        '''
+        connect the client to the server to retrieve direct messages
+        :return message
+        '''
         messages = []
 
         client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
