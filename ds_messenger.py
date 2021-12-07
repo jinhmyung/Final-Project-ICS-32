@@ -6,12 +6,20 @@ PORT = 3021
 
 
 class DirectMessage:
+    recipient = None
+    message = None
+    timestamp = None
+    send = None
+
     def __init__(self, recipient: str = None, message: str = None,
                  timestamp: float = None, send:bool = False):
         self.recipient = recipient
         self.message = message
         self.timestamp = timestamp
         self.send = send # is this a message send to this recipient
+
+        if self.timestamp is None:
+            self.timestamp = time.time()
 
     def __repr__(self):
         return f'(recipient={self.recipient}; message={self.message}; timestamp={self.timestamp}; send={self.send})'
@@ -93,6 +101,8 @@ class DirectMessenger:
         except socket.timeout:
             print('Connection time out, please try again or change the server or the port number')
             client.close()
+            return False
+        except OSError as e: # in case no connect
             return False
         else:
             print('client connected to {} on {}'.format(self.dsuserver, PORT))
