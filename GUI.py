@@ -94,6 +94,7 @@ class Body(tk.Frame):
         self.contacts_tree.bind("<<TreeviewSelect>>", self.node_select)
         self.contacts_tree.pack(fill=tk.BOTH, side=tk.TOP, expand=True, padx=5, pady=5)
 
+
         messages_frame = tk.Frame(master=self)
         messages_frame.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
 
@@ -126,15 +127,18 @@ class Body(tk.Frame):
         entry_editor_scrollbar.pack(fill=tk.Y, side=tk.LEFT, expand=False, padx=0, pady=0)
 
 
+
 class Footer(tk.Frame):
     def __init__(self, root, send_callback=None, add_callback=None):
         tk.Frame.__init__(self, root)
         self.root = root
         self._send_callback = send_callback
         self._add_callback = add_callback
+        self.dm_mode = False
+        self._draw()
         # After all initialization is complete, call the _draw method to pack the widgets
         # into the Footer instance
-        self._draw()
+
 
     def send_click(self):
         if self._send_callback is not None:
@@ -143,6 +147,30 @@ class Footer(tk.Frame):
     def add_click(self):
         if self._add_callback is not None:
             self._add_callback()
+    
+    def DM_click(self):
+        if self.dm_mode == False:
+            self.dm_mode = True
+        else:
+            self.dm_mode = False
+        if self.dm_mode == False or None:
+            self.configure(background='white')
+            self.entry_editor.configure(background='white')
+            app.body.messages_editor.configure(background='white')
+            app.body.entry_editor.configure(background='white')
+            app.body.contacts_tree.configure(background='white')
+
+
+        else:
+            self.configure(background='gray')
+            app.body.entry_editor.configure(background='gray')
+            app.body.messages_editor.configure(background='gray')
+            self.entry_editor.configure(background='gray')
+            app.body.contacts_tree.configure(background='orange')
+            
+
+
+
 
     def set_status(self, message):
         self.footer_label.configure(text=message)
@@ -156,6 +184,11 @@ class Footer(tk.Frame):
         add_button = tk.Button(master=self, text="Add", width=5)
         add_button.configure(command=self.add_click)
         add_button.pack(fill=tk.BOTH, side=tk.LEFT, padx=5, pady=5)
+
+        #DM_button = tk.Button(master=self, text="DarkMode", width=5)
+        #DM_button.configure(command=self.DM_click)
+        #DM_button.pack(fill=tk.BOTH, side=tk.TOP, padx=5, pady=5)
+
 
         self.footer_label = tk.Label(master=self, text="Ready.")
         self.footer_label.pack(fill=tk.BOTH, side=tk.LEFT, padx=5)
@@ -171,7 +204,7 @@ class MainApp(tk.Frame):
         self.root = root
         self._profile_filename = None
         self._current_profile = Profile()
-
+        self.dm_mode = False
         self._draw()
 
     def new_profile(self):
@@ -240,6 +273,7 @@ class MainApp(tk.Frame):
         self.body.reset_ui()
         self.body.set_contacts(self._current_profile.get_contacts())
 
+
     def check_new_messages(self): # Li
         if self._current_profile is None:
             pass
@@ -258,6 +292,34 @@ class MainApp(tk.Frame):
 
         self.root.after(5000, self.check_new_messages)
 
+    def DM_click(self):
+        if self.dm_mode == False:
+            self.dm_mode = True
+        else:
+            self.dm_mode = False
+        if self.dm_mode == False or None:
+            app.footer.configure(background='white')
+            app.footer.entry_editor.configure(background='white')
+            app.footer.footer_label.configure(background='white')
+            app.body.messages_editor.configure(background='white')
+            app.body.entry_editor.configure(background='white')
+            #app.body.contacts_tree.configure("Treeview", background = 'white', fieldbackground="white", foreground="white") #doesnt work
+            ttk.Style(main).configure("Treeview", background="white", fieldbackground="white", foreground="white")
+            #app.body.configure(background = 'white')
+        else:
+            app.footer.configure(background='gray')
+            app.body.entry_editor.configure(background='gray')
+            app.footer.footer_label.configure(background='gray')
+            app.body.messages_editor.configure(background='gray')
+            app.footer.entry_editor.configure(background='gray')
+            #app.body.contacts_tree.configure("Treeview", background='gray', fieldbackground="gray", foreground="gray")
+            ttk.Style(main).configure("Treeview", background="gray", fieldbackground="gray" , foreground="gray") #doesnt work
+            #app.body.configure(background = 'gray')
+            
+
+
+
+
     def _draw(self):
         """
         Build a menu and add it to the root frame.
@@ -270,17 +332,20 @@ class MainApp(tk.Frame):
         menu_file.add_command(label='New', command=self.new_profile)
         menu_file.add_command(label='Open...', command=self.open_profile)
         menu_file.add_command(label='Close', command=self.close)
+        menu_file.add_command(label='DarkMode', command=self.DM_click)
 
         # The Body and Footer classes must be initialized and packed into the root window.
         self.body = Body(self.root, self._current_profile)
         self.body.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
+
+        
 
         # TODO: Add a callback for detecting changes to the online checkbox widget in the Footer class. Follow
         # the conventions established by the existing save_callback parameter.
         # HINT: There may already be a class method that serves as a good callback function!
         self.footer = Footer(self.root, send_callback=self.send_message, add_callback=self.add_contact)
         self.footer.pack(fill=tk.BOTH, side=tk.BOTTOM)
-
+ 
 
 if __name__ == "__main__":
     # All Tkinter programs start with a root window. We will name ours 'main'.
@@ -289,9 +354,11 @@ if __name__ == "__main__":
     # 'title' assigns a text value to the Title Bar area of a window.
     main.title("ICS 32 Messenger Demo")
 
+
+
     # This is just an arbitrary starting point. You can change the value around to see how
     # the starting size of the window changes. I just thought this looked good for our UI.
-    main.geometry("720x480")
+    main.geometry("720x480") 
 
     # adding this option removes some legacy behavior with menus that modern OSes don't support.
     # If you're curious, feel free to comment out and see how the menu changes.
@@ -309,7 +376,7 @@ if __name__ == "__main__":
     # the resizing behavior of the window changes.
     main.update()
     main.minsize(main.winfo_width(), main.winfo_height())
-
+    
     main.after(ms=5000, func=app.check_new_messages) # check messages every 5 seconds
     # And finally, start up the event loop for the program (more on this in lecture).
     main.mainloop()
