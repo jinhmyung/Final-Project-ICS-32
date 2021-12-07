@@ -10,14 +10,18 @@ class DsuProfileError(Exception):
 
 
 class Contact:
+    '''
+    This is a class for initializing the attributes of a contact and a message
+    '''
     def __init__(self, recipient:str):
         self.recipient = recipient
         self.messages = [] # DirectMessages
 
-
-
-
 class Profile:
+    '''
+    This class seeks to initalize variables for the send function
+    and assigns attributes to a location
+    '''
     def __init__(self, dsuserver=None, username=None, password=None):
         self.dsuserver = dsuserver  # REQUIRED
         self.username = username  # REQUIRED
@@ -48,6 +52,9 @@ class Profile:
         return name
 
     def save_profile(self, path: str) -> None:
+        '''
+        Save attributes of a user-created profile in a DSU file
+        '''
         p = Path(path)
 
         if os.path.exists(p) and p.suffix == '.dsu':
@@ -91,6 +98,9 @@ class Profile:
     """
 
     def load_profile(self, path: str) -> None:
+        '''
+        Load an already existing DSU file with attributes initalized in Profile class
+        '''
         p = Path(path)
 
         if os.path.exists(p) and p.suffix == '.dsu':
