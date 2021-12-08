@@ -8,12 +8,21 @@ pwd2 = '0000'
 
 
 class TestSend(unittest.TestCase):
+    """
+    Class for testing the direct messenger
+    """
     def test_send_directmessage(self):
+        """
+        tests the send function
+        """
         global server, user1, user2, pwd1, pwd2
         messenger = DirectMessenger(server, user1, pwd1)
         self.assertEqual(messenger.send(message='1st', recipient=user2), True)
 
     def test_request_unread(self):
+        """
+        tests the retrieve new messages function
+        """
         global server, user1, user2, pwd1, pwd2
 
         messenger = DirectMessenger(server, user1, pwd1)
@@ -25,6 +34,9 @@ class TestSend(unittest.TestCase):
         self.assertEqual(new_list[len(new_list)-1].recipient, user1)
 
     def test_request_all(self):
+        """
+        tests the retrieve all messages function
+        """
         global server, user1, user2, pwd1, pwd2
 
         messenger = DirectMessenger(server, user1, pwd1)
