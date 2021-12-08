@@ -66,10 +66,7 @@ def to_json(send_command: str = 'join', usr: str = None, pwd: str = None,
         "all": {"token": token, "directmessage": "all"}
     }
     try:
-        # debug(command_map[send_command])
         return json.dumps(command_map[send_command])
     except KeyError:
         raise DSProtocalException('Not a valid message to be send to the server')
 
-# def #debug(msg):
-#     print(msg)
