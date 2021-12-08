@@ -294,10 +294,10 @@ class MainApp(tk.Frame):
                       background=[("selected", "#AAAADD")],
                       foreground=[("selected", "#222222")])
             app.footer.configure(background='white')
-            app.footer.entry_editor.configure(background='white')
-            app.footer.footer_label.configure(background='white')
-            app.body.messages_editor.configure(background='white')
-            app.body.entry_editor.configure(background='white')
+            app.footer.entry_editor.configure(background='white', foreground='#000000')
+            app.footer.footer_label.configure(background='white', foreground='#000000')
+            app.body.messages_editor.configure(background='white', foreground='#000000')
+            app.body.entry_editor.configure(background='white', foreground='#000000')
             # app.body.contacts_tree.configure("Treeview", background = 'white', fieldbackground="white", foreground="white") #doesnt work
             # ttk.Style(main).configure("Treeview", background="white", fieldbackground="white", foreground="white")
             # app.body.configure(background = 'white')
