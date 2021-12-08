@@ -50,7 +50,9 @@ class Body(tk.Frame):
         self.messages_editor.config(state='disable')
 
     def get_messages(self) -> str:
-        # Returns the text that is currently displayed in the entry_editor widget.
+        """
+        Returns the text that is currently displayed in the entry_editor widget.
+        """
         return self.entry_editor.get('1.0', 'end').rstrip()
 
     def delete_messages(self):
@@ -261,7 +263,7 @@ class MainApp(tk.Frame):
         check whether there is new messages
         """
         if self._current_profile is None:
-            pass
+            self.root.after(5000, self.check_new_messages)
         else:
             try:
                 debug('! new message check')
@@ -272,10 +274,14 @@ class MainApp(tk.Frame):
                     self.body.insert_messages(m.message)
                     self._current_profile._contacts[self.body.index].messages.append(m)
                 self._current_profile.save_profile(self._profile_filename)
+
+
             except TypeError:
                 return None
+            finally:
+                self.root.after(5000, self.check_new_messages)
 
-        self.root.after(5000, self.check_new_messages)
+
 
     def DM_click(self):
         if self.dm_mode == False:
