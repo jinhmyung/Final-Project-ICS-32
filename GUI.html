@@ -1,0 +1,1338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>GUI API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>GUI</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from ds_messenger import DirectMessage, DirectMessenger
+import tkinter as tk
+from tkinter import ttk, filedialog
+from Contact import Contact, Profile, DsuProfileError, DsuFileError
+
+
+class Body(tk.Frame):
+    &#34;&#34;&#34;
+    A subclass of tk.Frame that is responsible for drawing all of the widgets
+    in the body portion of the root frame.
+    &#34;&#34;&#34;
+    def __init__(self, root, select_callback=None):
+        &#34;&#34;&#34;
+        initializes an instance of this class
+        &#34;&#34;&#34;
+        tk.Frame.__init__(self, root)
+        self.root = root
+        self._select_callback = select_callback
+
+        # a list of the Post objects available in the active DSU file
+        self._contacts = []
+        self.index = None
+        self._messages = []
+
+        # After all initialization is complete, call the _draw method to pack the widgets
+        # into the Body instance
+        self._draw()
+
+    def node_select(self, event):
+        &#34;&#34;&#34;
+        Function for selecting contact in tree widget
+        &#34;&#34;&#34;
+        self.index = int(self.contacts_tree.selection()[0])
+        index = self.index
+        messages = self._contacts[index].messages  # list of DirectMessages
+
+        self.delete_messages()
+        for m in messages:
+            self.insert_messages(m.message, send=m.send)
+
+    def insert_messages(self, msg: str, index=&#39;end&#39;, send=False):
+        &#34;&#34;&#34;
+        insert messages msg to the message editor
+        :param index: where to insert
+        :param msg: message to be sent
+        :param send: whether the msg is send to the recipient
+        :return:
+        &#34;&#34;&#34;
+        msg = msg.strip()
+        self.messages_editor.config(state=&#39;normal&#39;)
+        if send:
+            self.messages_editor.insert(index, &#39;Me:\n   &#39; + msg + &#39;\n&#39;)
+        else:
+            self.messages_editor.insert(index, self._contacts[self.index].recipient + &#39;:\n    &#39; + msg + &#39;\n&#39;)
+        self.messages_editor.config(state=&#39;disable&#39;)
+
+    def get_messages(self) -&gt; str:
+        &#34;&#34;&#34;
+        Returns the text that is currently displayed in the entry_editor widget.
+        &#34;&#34;&#34;
+        return self.entry_editor.get(&#39;1.0&#39;, &#39;end&#39;).rstrip()
+
+    def delete_messages(self):
+        &#34;&#34;&#34;
+        For deleting messages
+        &#34;&#34;&#34;
+        self.messages_editor.config(state=&#39;normal&#39;)
+        self.messages_editor.delete(0.0, &#39;end&#39;)
+        self.messages_editor.config(state=&#39;disable&#39;)
+
+    def set_contacts(self, contacts: list):
+        &#34;&#34;&#34;
+        Populates the self._contacts attribute with posts from the active DSU file.
+        &#34;&#34;&#34;
+        self._contacts = contacts
+        print(self._contacts)
+        for i in range(len(self._contacts)):
+            self._insert_contacts_tree(id=i, contact=self._contacts[i])
+
+    def reset_ui(self):
+        &#34;&#34;&#34;
+        Resets all UI widgets to their default state. Useful for when clearing the UI is neccessary such
+        as when a new DSU file is loaded, for example.
+        &#34;&#34;&#34;
+        self.delete_messages()
+        self.entry_editor.configure(state=tk.NORMAL)
+        self._contacts = []
+        for item in self.contacts_tree.get_children():
+            self.contacts_tree.delete(item)
+
+    def _insert_contacts_tree(self, id, contact: Contact):
+        &#34;&#34;&#34;
+        inserts contacts to contact tree
+        &#34;&#34;&#34;
+        recipient = contact.recipient
+        # Since we don&#39;t have a title, we will use the first 24 characters of a
+        # post entry as the identifier in the post_tree widget.
+        if len(recipient) &gt; 25:
+            recipient = recipient[:24] + &#34;...&#34;
+        self.contacts_tree.insert(&#39;&#39;, id, id, text=recipient)
+
+    def _draw(self):
+        &#34;&#34;&#34;
+        For drawing out the body widgets in the GUI
+        &#34;&#34;&#34;
+        contacts_frame = tk.Frame(master=self, width=250)
+        contacts_frame.pack(fill=tk.BOTH, side=tk.LEFT)
+        self.contacts_tree = ttk.Treeview(contacts_frame, style=&#39;Treeview&#39;)
+        self.contacts_tree.bind(&#34;&lt;&lt;TreeviewSelect&gt;&gt;&#34;, self.node_select)
+        self.contacts_tree.pack(fill=tk.BOTH, side=tk.TOP, expand=True, padx=5, pady=5)
+
+        messages_frame = tk.Frame(master=self)
+        messages_frame.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
+
+        entry_frame = tk.Frame(master=self, bg=&#34;&#34;)
+        entry_frame.pack(fill=tk.BOTH, side=tk.TOP)
+
+        editor_frame = tk.Frame(master=entry_frame, bg=&#34;&#34;)
+        editor_frame.pack(fill=tk.BOTH, side=tk.LEFT, expand=True)
+
+        scroll_messages_frame = tk.Frame(master=messages_frame, bg=&#34;blue&#34;, width=10)
+        scroll_messages_frame.pack(fill=tk.BOTH, side=tk.RIGHT, expand=False)
+
+        scroll_entry_frame = tk.Frame(master=entry_frame, bg=&#34;blue&#34;, width=10)
+        scroll_entry_frame.pack(fill=tk.BOTH, side=tk.RIGHT, expand=False)
+
+        self.messages_editor = tk.Text(messages_frame, width=0)
+        self.messages_editor.config(state=&#34;disable&#34;)
+
+        self.messages_editor.pack(fill=tk.BOTH, side=tk.LEFT, expand=True, padx=0, pady=0)
+
+        self.entry_editor = tk.Text(editor_frame, width=0, height=6)
+        self.entry_editor.pack(fill=tk.BOTH, side=tk.LEFT, expand=True, padx=0, pady=5)
+
+        messages_editor_scrollbar = tk.Scrollbar(master=scroll_messages_frame, command=self.messages_editor.yview)
+        self.messages_editor[&#39;yscrollcommand&#39;] = messages_editor_scrollbar.set
+        messages_editor_scrollbar.pack(fill=tk.Y, side=tk.LEFT, expand=False, padx=0, pady=0)
+
+        entry_editor_scrollbar = tk.Scrollbar(master=scroll_entry_frame, command=self.entry_editor.yview)
+        self.entry_editor[&#39;yscrollcommand&#39;] = entry_editor_scrollbar.set
+        entry_editor_scrollbar.pack(fill=tk.Y, side=tk.LEFT, expand=False, padx=0, pady=0)
+
+
+class Footer(tk.Frame):
+    def __init__(self, root, send_callback=None, add_callback=None):
+        &#34;&#34;&#34;
+        initializes the an instace of Footer class
+        &#34;&#34;&#34;
+        tk.Frame.__init__(self, root)
+        self.root = root
+        self._send_callback = send_callback
+        self._add_callback = add_callback
+        self.dm_mode = False
+        self._draw()
+        # After all initialization is complete, call the _draw method to pack the widgets
+        # into the Footer instance
+
+    def send_click(self):
+        &#34;&#34;&#34;
+        Called for when the send button is clicked
+        &#34;&#34;&#34;
+        if self._send_callback is not None:
+            self._send_callback()
+
+    def add_click(self):
+        &#34;&#34;&#34;
+        Called for when the add button is clicked
+        &#34;&#34;&#34;
+        if self._add_callback is not None:
+            self._add_callback()
+
+    def set_status(self, message):
+        &#34;&#34;&#34;
+        Called for changing the label status
+        &#34;&#34;&#34;
+        self.footer_label.configure(text=message)
+
+    def _draw(self):
+        &#34;&#34;&#34;
+        Draws the Footer widget for the GUI
+        &#34;&#34;&#34;
+        entry_frame = tk.Frame(master=self, bg=&#34;&#34;)
+        entry_frame.pack(fill=tk.BOTH, side=tk.LEFT)
+        self.entry_editor = tk.Text(entry_frame, width=20, height=2)
+        self.entry_editor.pack(fill=tk.BOTH, side=tk.LEFT, expand=True, padx=5, pady=5)
+
+        add_button = tk.Button(master=self, text=&#34;Add&#34;, width=5)
+        add_button.configure(command=self.add_click)
+        add_button.pack(fill=tk.BOTH, side=tk.LEFT, padx=5, pady=5)
+
+        self.footer_label = tk.Label(master=self, text=&#34;Ready.&#34;)
+        self.footer_label.pack(fill=tk.BOTH, side=tk.LEFT, padx=5)
+
+        send_button = tk.Button(master=self, text=&#34;Send&#34;, width=20)
+        send_button.configure(command=self.send_click)
+        send_button.pack(fill=tk.BOTH, side=tk.RIGHT, padx=5, pady=5)
+
+
+class MainApp(tk.Frame):
+    &#34;&#34;&#34;
+    Responsible for saving and checking messages
+    &#34;&#34;&#34;
+    def __init__(self, root):
+        &#34;&#34;&#34;
+        Initializes instance of the MainApp class
+        &#34;&#34;&#34;
+        tk.Frame.__init__(self, root)
+        self.root = root
+        self._profile_filename = None
+        self._current_profile = Profile()
+        self.dm_mode = False
+        self._draw()
+
+    def new_profile(self):
+        &#34;&#34;&#34;
+        For creating a new file DSU file
+        &#34;&#34;&#34;
+        filename = tk.filedialog.asksaveasfile(filetypes=[(&#39;Distributed Social Profile&#39;, &#39;*.dsu&#39;)])
+        self._profile_filename = filename.name
+        self._current_profile = Profile()
+        self.body.reset_ui()
+
+
+    def open_profile(self):
+        &#34;&#34;&#34;
+        Opens an existing DSU file when the &#39;Open&#39; menu item is clicked and loads the profile
+        data into the UI.
+        &#34;&#34;&#34;
+        filename = tk.filedialog.askopenfile(filetypes=[(&#39;Distributed Social Profile&#39;, &#39;*.dsu&#39;)])
+        try:
+            self._profile_filename = filename.name
+            self._current_profile = Profile()
+            self._current_profile.load_profile(self._profile_filename)
+
+            self.body.reset_ui()
+            self.body.set_contacts(self._current_profile.get_contacts())
+
+        except DsuFileError as e:
+            print(e)
+
+
+    def close(self):
+        &#34;&#34;&#34;
+        Closes the program when the &#39;Close&#39; menu item is clicked.
+        &#34;&#34;&#34;
+        self.root.destroy()
+
+    def send_message(self):
+        &#34;&#34;&#34;
+        send the new messages in the entry_editor to display in the screen and to the server
+        &#34;&#34;&#34;
+        new_msg = self.body.entry_editor.get(0.0, &#39;end&#39;).strip()
+
+        self.body.insert_messages(new_msg, send=True)
+
+        # send message to recipient
+        published = self.publish(new_msg)
+        if not published:
+            self.footer.set_status(&#39;Message not sent to the server&#39;)
+        else:
+            self.footer.set_status(&#39;Message sent&#39;)
+
+        # save the new_msg as DirectMessage to the Profile
+        new_directMessage = DirectMessage(recipient=self.body._contacts[self.body.index].recipient,
+                                          message=new_msg, send=True)
+        self.body._contacts[self.body.index].messages.append(new_directMessage)
+        self._current_profile._contacts = self.body._contacts
+        debug(self._current_profile.get_contacts_name())
+        self._current_profile.save_profile(self._profile_filename)
+
+    def publish(self, new_msg: str) -&gt; bool:
+        &#34;&#34;&#34;
+        publish new_msg to the server, return False if failed else True
+        &#34;&#34;&#34;
+        messenger = DirectMessenger(self._current_profile.dsuserver, self._current_profile.username,
+                                    self._current_profile.password)
+        return messenger.send(message=new_msg, recipient=self.body._contacts[self.body.index].recipient)
+
+    def add_contact(self): 
+        &#34;&#34;&#34;
+        add the input in the entry_editor to the Contacts list and save profile
+        &#34;&#34;&#34;
+        new_contact = self.footer.entry_editor.get(0.0, &#39;end&#39;)
+        self._current_profile._contacts.append(Contact(new_contact.strip()))
+        self._current_profile.save_profile(self._profile_filename)
+        self.body.reset_ui()
+        self.body.set_contacts(self._current_profile.get_contacts())
+
+    def check_new_messages(self):
+        &#34;&#34;&#34;
+        check whether there is new messages
+        &#34;&#34;&#34;
+        if self._current_profile is None:
+            self.root.after(5000, self.check_new_messages)
+        else:
+            try:
+                debug(&#39;! new message check&#39;)
+                messenger = DirectMessenger(self._current_profile.dsuserver, self._current_profile.username,
+                                            self._current_profile.password)
+                new_msgs = messenger.retrieve_new()
+                for m in new_msgs:
+                    self.body.insert_messages(m.message)
+                    self._current_profile._contacts[self.body.index].messages.append(m)
+                self._current_profile.save_profile(self._profile_filename)
+
+
+            except TypeError:
+                return None
+            finally:
+                self.root.after(5000, self.check_new_messages)
+
+
+
+    def DM_click(self):
+        &#34;&#34;&#34;
+        Function for when the Darkmode button is clicked. Adjusts the background of the GUI to darkmode
+        &#34;&#34;&#34;
+        if self.dm_mode == False:
+            self.dm_mode = True
+        else:
+            self.dm_mode = False
+
+        style = ttk.Style()
+
+        if self.dm_mode == False or None:
+            style.theme_use(&#39;clam&#39;)
+            style.configure(&#39;Treeview&#39;, background=&#39;white&#39;,
+                            fieldbackground=&#39;white&#39;,
+                            foreground=&#39;black&#39;)
+            style.map(&#39;Treeview&#39;,
+                      background=[(&#34;selected&#34;, &#34;#AAAADD&#34;)],
+                      foreground=[(&#34;selected&#34;, &#34;#222222&#34;)])
+            app.footer.configure(background=&#39;white&#39;)
+            app.footer.entry_editor.configure(background=&#39;white&#39;, foreground=&#39;#000000&#39;)
+            app.footer.footer_label.configure(background=&#39;white&#39;, foreground=&#39;#000000&#39;)
+            app.body.messages_editor.configure(background=&#39;white&#39;, foreground=&#39;#000000&#39;)
+            app.body.entry_editor.configure(background=&#39;white&#39;, foreground=&#39;#000000&#39;)
+
+        else:
+            style.theme_use(&#39;clam&#39;)
+            style.configure(&#39;Treeview&#39;,background=&#39;#333333&#39;,
+                            fieldbackground=&#39;#333333&#39;,
+                            foreground=&#39;#FFFFFF&#39;)
+            style.map(&#39;Treeview&#39;,
+                      background=[(&#34;selected&#34;, &#34;#666699&#34;)],
+                      foreground=[(&#34;selected&#34;, &#34;#FFFFFF&#34;)])
+            app.footer.configure(background=&#39;#333333&#39;)
+            app.body.entry_editor.configure(background=&#39;#333333&#39;, foreground=&#39;#FFFFFF&#39;)
+            app.footer.footer_label.configure(background=&#39;#333333&#39;, foreground=&#39;#FFFFFF&#39;)
+            app.body.messages_editor.configure(background=&#39;#333333&#39;, foreground=&#39;#FFFFFF&#39;)
+            app.footer.entry_editor.configure(background=&#39;#333333&#39;, foreground=&#39;#FFFFFF&#39;)
+            app.body.configure(background = &#39;#333333&#39;)
+
+    def _draw(self):
+        &#34;&#34;&#34;
+        Build a menu and add it to the root frame.
+        &#34;&#34;&#34;
+
+        menu_bar = tk.Menu(self.root)
+        self.root[&#39;menu&#39;] = menu_bar
+        menu_file = tk.Menu(menu_bar)
+        menu_bar.add_cascade(menu=menu_file, label=&#39;File&#39;)
+        menu_file.add_command(label=&#39;New&#39;, command=self.new_profile)
+        menu_file.add_command(label=&#39;Open...&#39;, command=self.open_profile)
+        menu_file.add_command(label=&#39;Close&#39;, command=self.close)
+
+        menu_bar.add_command(label=&#39;Dark Mode&#39;, command=self.DM_click)
+
+        # The Body and Footer classes must be initialized and packed into the root window.
+        self.body = Body(self.root, self._current_profile)
+        self.body.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
+
+
+        self.footer = Footer(self.root, send_callback=self.send_message, add_callback=self.add_contact)
+        self.footer.pack(fill=tk.BOTH, side=tk.BOTTOM)
+
+
+if __name__ == &#34;__main__&#34;:
+    # All Tkinter programs start with a root window. We will name ours &#39;main&#39;.
+    main = tk.Tk()
+
+    # &#39;title&#39; assigns a text value to the Title Bar area of a window.
+    main.title(&#34;ICS 32 Messenger Demo&#34;)
+
+    # This is just an arbitrary starting point. You can change the value around to see how
+    # the starting size of the window changes. I just thought this looked good for our UI.
+    main.geometry(&#34;720x480&#34;)
+
+    # adding this option removes some legacy behavior with menus that modern OSes don&#39;t support.
+    # If you&#39;re curious, feel free to comment out and see how the menu changes.
+    main.option_add(&#39;*tearOff&#39;, False)
+
+    # Initialize the MainApp class, which is the starting point for the widgets used in the program.
+    # All of the classes that we use, subclass Tk.Frame, since our root frame is main, we initialize
+    # the class with it.
+    app = MainApp(main)
+
+    # When update is called, we finalize the states of all widgets that have been configured within the root frame.
+    # Here, Update ensures that we get an accurate width and height reading based on the types of widgets
+    # we have used.
+    # minsize prevents the root window from resizing too small. Feel free to comment it out and see how
+    # the resizing behavior of the window changes.
+    main.update()
+    main.minsize(main.winfo_width(), main.winfo_height())
+
+    main.after(ms=5000, func=app.check_new_messages)  # check messages every 5 seconds
+    # And finally, start up the event loop for the program (more on this in lecture).
+    main.mainloop()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="GUI.Body"><code class="flex name class">
+<span>class <span class="ident">Body</span></span>
+<span>(</span><span>root, select_callback=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A subclass of tk.Frame that is responsible for drawing all of the widgets
+in the body portion of the root frame.</p>
+<p>initializes an instance of this class</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Body(tk.Frame):
+    &#34;&#34;&#34;
+    A subclass of tk.Frame that is responsible for drawing all of the widgets
+    in the body portion of the root frame.
+    &#34;&#34;&#34;
+    def __init__(self, root, select_callback=None):
+        &#34;&#34;&#34;
+        initializes an instance of this class
+        &#34;&#34;&#34;
+        tk.Frame.__init__(self, root)
+        self.root = root
+        self._select_callback = select_callback
+
+        # a list of the Post objects available in the active DSU file
+        self._contacts = []
+        self.index = None
+        self._messages = []
+
+        # After all initialization is complete, call the _draw method to pack the widgets
+        # into the Body instance
+        self._draw()
+
+    def node_select(self, event):
+        &#34;&#34;&#34;
+        Function for selecting contact in tree widget
+        &#34;&#34;&#34;
+        self.index = int(self.contacts_tree.selection()[0])
+        index = self.index
+        messages = self._contacts[index].messages  # list of DirectMessages
+
+        self.delete_messages()
+        for m in messages:
+            self.insert_messages(m.message, send=m.send)
+
+    def insert_messages(self, msg: str, index=&#39;end&#39;, send=False):
+        &#34;&#34;&#34;
+        insert messages msg to the message editor
+        :param index: where to insert
+        :param msg: message to be sent
+        :param send: whether the msg is send to the recipient
+        :return:
+        &#34;&#34;&#34;
+        msg = msg.strip()
+        self.messages_editor.config(state=&#39;normal&#39;)
+        if send:
+            self.messages_editor.insert(index, &#39;Me:\n   &#39; + msg + &#39;\n&#39;)
+        else:
+            self.messages_editor.insert(index, self._contacts[self.index].recipient + &#39;:\n    &#39; + msg + &#39;\n&#39;)
+        self.messages_editor.config(state=&#39;disable&#39;)
+
+    def get_messages(self) -&gt; str:
+        &#34;&#34;&#34;
+        Returns the text that is currently displayed in the entry_editor widget.
+        &#34;&#34;&#34;
+        return self.entry_editor.get(&#39;1.0&#39;, &#39;end&#39;).rstrip()
+
+    def delete_messages(self):
+        &#34;&#34;&#34;
+        For deleting messages
+        &#34;&#34;&#34;
+        self.messages_editor.config(state=&#39;normal&#39;)
+        self.messages_editor.delete(0.0, &#39;end&#39;)
+        self.messages_editor.config(state=&#39;disable&#39;)
+
+    def set_contacts(self, contacts: list):
+        &#34;&#34;&#34;
+        Populates the self._contacts attribute with posts from the active DSU file.
+        &#34;&#34;&#34;
+        self._contacts = contacts
+        print(self._contacts)
+        for i in range(len(self._contacts)):
+            self._insert_contacts_tree(id=i, contact=self._contacts[i])
+
+    def reset_ui(self):
+        &#34;&#34;&#34;
+        Resets all UI widgets to their default state. Useful for when clearing the UI is neccessary such
+        as when a new DSU file is loaded, for example.
+        &#34;&#34;&#34;
+        self.delete_messages()
+        self.entry_editor.configure(state=tk.NORMAL)
+        self._contacts = []
+        for item in self.contacts_tree.get_children():
+            self.contacts_tree.delete(item)
+
+    def _insert_contacts_tree(self, id, contact: Contact):
+        &#34;&#34;&#34;
+        inserts contacts to contact tree
+        &#34;&#34;&#34;
+        recipient = contact.recipient
+        # Since we don&#39;t have a title, we will use the first 24 characters of a
+        # post entry as the identifier in the post_tree widget.
+        if len(recipient) &gt; 25:
+            recipient = recipient[:24] + &#34;...&#34;
+        self.contacts_tree.insert(&#39;&#39;, id, id, text=recipient)
+
+    def _draw(self):
+        &#34;&#34;&#34;
+        For drawing out the body widgets in the GUI
+        &#34;&#34;&#34;
+        contacts_frame = tk.Frame(master=self, width=250)
+        contacts_frame.pack(fill=tk.BOTH, side=tk.LEFT)
+        self.contacts_tree = ttk.Treeview(contacts_frame, style=&#39;Treeview&#39;)
+        self.contacts_tree.bind(&#34;&lt;&lt;TreeviewSelect&gt;&gt;&#34;, self.node_select)
+        self.contacts_tree.pack(fill=tk.BOTH, side=tk.TOP, expand=True, padx=5, pady=5)
+
+        messages_frame = tk.Frame(master=self)
+        messages_frame.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
+
+        entry_frame = tk.Frame(master=self, bg=&#34;&#34;)
+        entry_frame.pack(fill=tk.BOTH, side=tk.TOP)
+
+        editor_frame = tk.Frame(master=entry_frame, bg=&#34;&#34;)
+        editor_frame.pack(fill=tk.BOTH, side=tk.LEFT, expand=True)
+
+        scroll_messages_frame = tk.Frame(master=messages_frame, bg=&#34;blue&#34;, width=10)
+        scroll_messages_frame.pack(fill=tk.BOTH, side=tk.RIGHT, expand=False)
+
+        scroll_entry_frame = tk.Frame(master=entry_frame, bg=&#34;blue&#34;, width=10)
+        scroll_entry_frame.pack(fill=tk.BOTH, side=tk.RIGHT, expand=False)
+
+        self.messages_editor = tk.Text(messages_frame, width=0)
+        self.messages_editor.config(state=&#34;disable&#34;)
+
+        self.messages_editor.pack(fill=tk.BOTH, side=tk.LEFT, expand=True, padx=0, pady=0)
+
+        self.entry_editor = tk.Text(editor_frame, width=0, height=6)
+        self.entry_editor.pack(fill=tk.BOTH, side=tk.LEFT, expand=True, padx=0, pady=5)
+
+        messages_editor_scrollbar = tk.Scrollbar(master=scroll_messages_frame, command=self.messages_editor.yview)
+        self.messages_editor[&#39;yscrollcommand&#39;] = messages_editor_scrollbar.set
+        messages_editor_scrollbar.pack(fill=tk.Y, side=tk.LEFT, expand=False, padx=0, pady=0)
+
+        entry_editor_scrollbar = tk.Scrollbar(master=scroll_entry_frame, command=self.entry_editor.yview)
+        self.entry_editor[&#39;yscrollcommand&#39;] = entry_editor_scrollbar.set
+        entry_editor_scrollbar.pack(fill=tk.Y, side=tk.LEFT, expand=False, padx=0, pady=0)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>tkinter.Frame</li>
+<li>tkinter.Widget</li>
+<li>tkinter.BaseWidget</li>
+<li>tkinter.Misc</li>
+<li>tkinter.Pack</li>
+<li>tkinter.Place</li>
+<li>tkinter.Grid</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="GUI.Body.delete_messages"><code class="name flex">
+<span>def <span class="ident">delete_messages</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>For deleting messages</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delete_messages(self):
+    &#34;&#34;&#34;
+    For deleting messages
+    &#34;&#34;&#34;
+    self.messages_editor.config(state=&#39;normal&#39;)
+    self.messages_editor.delete(0.0, &#39;end&#39;)
+    self.messages_editor.config(state=&#39;disable&#39;)</code></pre>
+</details>
+</dd>
+<dt id="GUI.Body.get_messages"><code class="name flex">
+<span>def <span class="ident">get_messages</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the text that is currently displayed in the entry_editor widget.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_messages(self) -&gt; str:
+    &#34;&#34;&#34;
+    Returns the text that is currently displayed in the entry_editor widget.
+    &#34;&#34;&#34;
+    return self.entry_editor.get(&#39;1.0&#39;, &#39;end&#39;).rstrip()</code></pre>
+</details>
+</dd>
+<dt id="GUI.Body.insert_messages"><code class="name flex">
+<span>def <span class="ident">insert_messages</span></span>(<span>self, msg: str, index='end', send=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>insert messages msg to the message editor
+:param index: where to insert
+:param msg: message to be sent
+:param send: whether the msg is send to the recipient
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def insert_messages(self, msg: str, index=&#39;end&#39;, send=False):
+    &#34;&#34;&#34;
+    insert messages msg to the message editor
+    :param index: where to insert
+    :param msg: message to be sent
+    :param send: whether the msg is send to the recipient
+    :return:
+    &#34;&#34;&#34;
+    msg = msg.strip()
+    self.messages_editor.config(state=&#39;normal&#39;)
+    if send:
+        self.messages_editor.insert(index, &#39;Me:\n   &#39; + msg + &#39;\n&#39;)
+    else:
+        self.messages_editor.insert(index, self._contacts[self.index].recipient + &#39;:\n    &#39; + msg + &#39;\n&#39;)
+    self.messages_editor.config(state=&#39;disable&#39;)</code></pre>
+</details>
+</dd>
+<dt id="GUI.Body.node_select"><code class="name flex">
+<span>def <span class="ident">node_select</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function for selecting contact in tree widget</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def node_select(self, event):
+    &#34;&#34;&#34;
+    Function for selecting contact in tree widget
+    &#34;&#34;&#34;
+    self.index = int(self.contacts_tree.selection()[0])
+    index = self.index
+    messages = self._contacts[index].messages  # list of DirectMessages
+
+    self.delete_messages()
+    for m in messages:
+        self.insert_messages(m.message, send=m.send)</code></pre>
+</details>
+</dd>
+<dt id="GUI.Body.reset_ui"><code class="name flex">
+<span>def <span class="ident">reset_ui</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Resets all UI widgets to their default state. Useful for when clearing the UI is neccessary such
+as when a new DSU file is loaded, for example.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reset_ui(self):
+    &#34;&#34;&#34;
+    Resets all UI widgets to their default state. Useful for when clearing the UI is neccessary such
+    as when a new DSU file is loaded, for example.
+    &#34;&#34;&#34;
+    self.delete_messages()
+    self.entry_editor.configure(state=tk.NORMAL)
+    self._contacts = []
+    for item in self.contacts_tree.get_children():
+        self.contacts_tree.delete(item)</code></pre>
+</details>
+</dd>
+<dt id="GUI.Body.set_contacts"><code class="name flex">
+<span>def <span class="ident">set_contacts</span></span>(<span>self, contacts: list)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Populates the self._contacts attribute with posts from the active DSU file.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_contacts(self, contacts: list):
+    &#34;&#34;&#34;
+    Populates the self._contacts attribute with posts from the active DSU file.
+    &#34;&#34;&#34;
+    self._contacts = contacts
+    print(self._contacts)
+    for i in range(len(self._contacts)):
+        self._insert_contacts_tree(id=i, contact=self._contacts[i])</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="GUI.Footer"><code class="flex name class">
+<span>class <span class="ident">Footer</span></span>
+<span>(</span><span>root, send_callback=None, add_callback=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Frame widget which may contain other widgets and can have a 3D border.</p>
+<p>initializes the an instace of Footer class</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Footer(tk.Frame):
+    def __init__(self, root, send_callback=None, add_callback=None):
+        &#34;&#34;&#34;
+        initializes the an instace of Footer class
+        &#34;&#34;&#34;
+        tk.Frame.__init__(self, root)
+        self.root = root
+        self._send_callback = send_callback
+        self._add_callback = add_callback
+        self.dm_mode = False
+        self._draw()
+        # After all initialization is complete, call the _draw method to pack the widgets
+        # into the Footer instance
+
+    def send_click(self):
+        &#34;&#34;&#34;
+        Called for when the send button is clicked
+        &#34;&#34;&#34;
+        if self._send_callback is not None:
+            self._send_callback()
+
+    def add_click(self):
+        &#34;&#34;&#34;
+        Called for when the add button is clicked
+        &#34;&#34;&#34;
+        if self._add_callback is not None:
+            self._add_callback()
+
+    def set_status(self, message):
+        &#34;&#34;&#34;
+        Called for changing the label status
+        &#34;&#34;&#34;
+        self.footer_label.configure(text=message)
+
+    def _draw(self):
+        &#34;&#34;&#34;
+        Draws the Footer widget for the GUI
+        &#34;&#34;&#34;
+        entry_frame = tk.Frame(master=self, bg=&#34;&#34;)
+        entry_frame.pack(fill=tk.BOTH, side=tk.LEFT)
+        self.entry_editor = tk.Text(entry_frame, width=20, height=2)
+        self.entry_editor.pack(fill=tk.BOTH, side=tk.LEFT, expand=True, padx=5, pady=5)
+
+        add_button = tk.Button(master=self, text=&#34;Add&#34;, width=5)
+        add_button.configure(command=self.add_click)
+        add_button.pack(fill=tk.BOTH, side=tk.LEFT, padx=5, pady=5)
+
+        self.footer_label = tk.Label(master=self, text=&#34;Ready.&#34;)
+        self.footer_label.pack(fill=tk.BOTH, side=tk.LEFT, padx=5)
+
+        send_button = tk.Button(master=self, text=&#34;Send&#34;, width=20)
+        send_button.configure(command=self.send_click)
+        send_button.pack(fill=tk.BOTH, side=tk.RIGHT, padx=5, pady=5)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>tkinter.Frame</li>
+<li>tkinter.Widget</li>
+<li>tkinter.BaseWidget</li>
+<li>tkinter.Misc</li>
+<li>tkinter.Pack</li>
+<li>tkinter.Place</li>
+<li>tkinter.Grid</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="GUI.Footer.add_click"><code class="name flex">
+<span>def <span class="ident">add_click</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Called for when the add button is clicked</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_click(self):
+    &#34;&#34;&#34;
+    Called for when the add button is clicked
+    &#34;&#34;&#34;
+    if self._add_callback is not None:
+        self._add_callback()</code></pre>
+</details>
+</dd>
+<dt id="GUI.Footer.send_click"><code class="name flex">
+<span>def <span class="ident">send_click</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Called for when the send button is clicked</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def send_click(self):
+    &#34;&#34;&#34;
+    Called for when the send button is clicked
+    &#34;&#34;&#34;
+    if self._send_callback is not None:
+        self._send_callback()</code></pre>
+</details>
+</dd>
+<dt id="GUI.Footer.set_status"><code class="name flex">
+<span>def <span class="ident">set_status</span></span>(<span>self, message)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Called for changing the label status</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_status(self, message):
+    &#34;&#34;&#34;
+    Called for changing the label status
+    &#34;&#34;&#34;
+    self.footer_label.configure(text=message)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="GUI.MainApp"><code class="flex name class">
+<span>class <span class="ident">MainApp</span></span>
+<span>(</span><span>root)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Responsible for saving and checking messages</p>
+<p>Initializes instance of the MainApp class</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MainApp(tk.Frame):
+    &#34;&#34;&#34;
+    Responsible for saving and checking messages
+    &#34;&#34;&#34;
+    def __init__(self, root):
+        &#34;&#34;&#34;
+        Initializes instance of the MainApp class
+        &#34;&#34;&#34;
+        tk.Frame.__init__(self, root)
+        self.root = root
+        self._profile_filename = None
+        self._current_profile = Profile()
+        self.dm_mode = False
+        self._draw()
+
+    def new_profile(self):
+        &#34;&#34;&#34;
+        For creating a new file DSU file
+        &#34;&#34;&#34;
+        filename = tk.filedialog.asksaveasfile(filetypes=[(&#39;Distributed Social Profile&#39;, &#39;*.dsu&#39;)])
+        self._profile_filename = filename.name
+        self._current_profile = Profile()
+        self.body.reset_ui()
+
+
+    def open_profile(self):
+        &#34;&#34;&#34;
+        Opens an existing DSU file when the &#39;Open&#39; menu item is clicked and loads the profile
+        data into the UI.
+        &#34;&#34;&#34;
+        filename = tk.filedialog.askopenfile(filetypes=[(&#39;Distributed Social Profile&#39;, &#39;*.dsu&#39;)])
+        try:
+            self._profile_filename = filename.name
+            self._current_profile = Profile()
+            self._current_profile.load_profile(self._profile_filename)
+
+            self.body.reset_ui()
+            self.body.set_contacts(self._current_profile.get_contacts())
+
+        except DsuFileError as e:
+            print(e)
+
+
+    def close(self):
+        &#34;&#34;&#34;
+        Closes the program when the &#39;Close&#39; menu item is clicked.
+        &#34;&#34;&#34;
+        self.root.destroy()
+
+    def send_message(self):
+        &#34;&#34;&#34;
+        send the new messages in the entry_editor to display in the screen and to the server
+        &#34;&#34;&#34;
+        new_msg = self.body.entry_editor.get(0.0, &#39;end&#39;).strip()
+
+        self.body.insert_messages(new_msg, send=True)
+
+        # send message to recipient
+        published = self.publish(new_msg)
+        if not published:
+            self.footer.set_status(&#39;Message not sent to the server&#39;)
+        else:
+            self.footer.set_status(&#39;Message sent&#39;)
+
+        # save the new_msg as DirectMessage to the Profile
+        new_directMessage = DirectMessage(recipient=self.body._contacts[self.body.index].recipient,
+                                          message=new_msg, send=True)
+        self.body._contacts[self.body.index].messages.append(new_directMessage)
+        self._current_profile._contacts = self.body._contacts
+        debug(self._current_profile.get_contacts_name())
+        self._current_profile.save_profile(self._profile_filename)
+
+    def publish(self, new_msg: str) -&gt; bool:
+        &#34;&#34;&#34;
+        publish new_msg to the server, return False if failed else True
+        &#34;&#34;&#34;
+        messenger = DirectMessenger(self._current_profile.dsuserver, self._current_profile.username,
+                                    self._current_profile.password)
+        return messenger.send(message=new_msg, recipient=self.body._contacts[self.body.index].recipient)
+
+    def add_contact(self): 
+        &#34;&#34;&#34;
+        add the input in the entry_editor to the Contacts list and save profile
+        &#34;&#34;&#34;
+        new_contact = self.footer.entry_editor.get(0.0, &#39;end&#39;)
+        self._current_profile._contacts.append(Contact(new_contact.strip()))
+        self._current_profile.save_profile(self._profile_filename)
+        self.body.reset_ui()
+        self.body.set_contacts(self._current_profile.get_contacts())
+
+    def check_new_messages(self):
+        &#34;&#34;&#34;
+        check whether there is new messages
+        &#34;&#34;&#34;
+        if self._current_profile is None:
+            self.root.after(5000, self.check_new_messages)
+        else:
+            try:
+                debug(&#39;! new message check&#39;)
+                messenger = DirectMessenger(self._current_profile.dsuserver, self._current_profile.username,
+                                            self._current_profile.password)
+                new_msgs = messenger.retrieve_new()
+                for m in new_msgs:
+                    self.body.insert_messages(m.message)
+                    self._current_profile._contacts[self.body.index].messages.append(m)
+                self._current_profile.save_profile(self._profile_filename)
+
+
+            except TypeError:
+                return None
+            finally:
+                self.root.after(5000, self.check_new_messages)
+
+
+
+    def DM_click(self):
+        &#34;&#34;&#34;
+        Function for when the Darkmode button is clicked. Adjusts the background of the GUI to darkmode
+        &#34;&#34;&#34;
+        if self.dm_mode == False:
+            self.dm_mode = True
+        else:
+            self.dm_mode = False
+
+        style = ttk.Style()
+
+        if self.dm_mode == False or None:
+            style.theme_use(&#39;clam&#39;)
+            style.configure(&#39;Treeview&#39;, background=&#39;white&#39;,
+                            fieldbackground=&#39;white&#39;,
+                            foreground=&#39;black&#39;)
+            style.map(&#39;Treeview&#39;,
+                      background=[(&#34;selected&#34;, &#34;#AAAADD&#34;)],
+                      foreground=[(&#34;selected&#34;, &#34;#222222&#34;)])
+            app.footer.configure(background=&#39;white&#39;)
+            app.footer.entry_editor.configure(background=&#39;white&#39;, foreground=&#39;#000000&#39;)
+            app.footer.footer_label.configure(background=&#39;white&#39;, foreground=&#39;#000000&#39;)
+            app.body.messages_editor.configure(background=&#39;white&#39;, foreground=&#39;#000000&#39;)
+            app.body.entry_editor.configure(background=&#39;white&#39;, foreground=&#39;#000000&#39;)
+
+        else:
+            style.theme_use(&#39;clam&#39;)
+            style.configure(&#39;Treeview&#39;,background=&#39;#333333&#39;,
+                            fieldbackground=&#39;#333333&#39;,
+                            foreground=&#39;#FFFFFF&#39;)
+            style.map(&#39;Treeview&#39;,
+                      background=[(&#34;selected&#34;, &#34;#666699&#34;)],
+                      foreground=[(&#34;selected&#34;, &#34;#FFFFFF&#34;)])
+            app.footer.configure(background=&#39;#333333&#39;)
+            app.body.entry_editor.configure(background=&#39;#333333&#39;, foreground=&#39;#FFFFFF&#39;)
+            app.footer.footer_label.configure(background=&#39;#333333&#39;, foreground=&#39;#FFFFFF&#39;)
+            app.body.messages_editor.configure(background=&#39;#333333&#39;, foreground=&#39;#FFFFFF&#39;)
+            app.footer.entry_editor.configure(background=&#39;#333333&#39;, foreground=&#39;#FFFFFF&#39;)
+            app.body.configure(background = &#39;#333333&#39;)
+
+    def _draw(self):
+        &#34;&#34;&#34;
+        Build a menu and add it to the root frame.
+        &#34;&#34;&#34;
+
+        menu_bar = tk.Menu(self.root)
+        self.root[&#39;menu&#39;] = menu_bar
+        menu_file = tk.Menu(menu_bar)
+        menu_bar.add_cascade(menu=menu_file, label=&#39;File&#39;)
+        menu_file.add_command(label=&#39;New&#39;, command=self.new_profile)
+        menu_file.add_command(label=&#39;Open...&#39;, command=self.open_profile)
+        menu_file.add_command(label=&#39;Close&#39;, command=self.close)
+
+        menu_bar.add_command(label=&#39;Dark Mode&#39;, command=self.DM_click)
+
+        # The Body and Footer classes must be initialized and packed into the root window.
+        self.body = Body(self.root, self._current_profile)
+        self.body.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
+
+
+        self.footer = Footer(self.root, send_callback=self.send_message, add_callback=self.add_contact)
+        self.footer.pack(fill=tk.BOTH, side=tk.BOTTOM)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>tkinter.Frame</li>
+<li>tkinter.Widget</li>
+<li>tkinter.BaseWidget</li>
+<li>tkinter.Misc</li>
+<li>tkinter.Pack</li>
+<li>tkinter.Place</li>
+<li>tkinter.Grid</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="GUI.MainApp.DM_click"><code class="name flex">
+<span>def <span class="ident">DM_click</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function for when the Darkmode button is clicked. Adjusts the background of the GUI to darkmode</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def DM_click(self):
+    &#34;&#34;&#34;
+    Function for when the Darkmode button is clicked. Adjusts the background of the GUI to darkmode
+    &#34;&#34;&#34;
+    if self.dm_mode == False:
+        self.dm_mode = True
+    else:
+        self.dm_mode = False
+
+    style = ttk.Style()
+
+    if self.dm_mode == False or None:
+        style.theme_use(&#39;clam&#39;)
+        style.configure(&#39;Treeview&#39;, background=&#39;white&#39;,
+                        fieldbackground=&#39;white&#39;,
+                        foreground=&#39;black&#39;)
+        style.map(&#39;Treeview&#39;,
+                  background=[(&#34;selected&#34;, &#34;#AAAADD&#34;)],
+                  foreground=[(&#34;selected&#34;, &#34;#222222&#34;)])
+        app.footer.configure(background=&#39;white&#39;)
+        app.footer.entry_editor.configure(background=&#39;white&#39;, foreground=&#39;#000000&#39;)
+        app.footer.footer_label.configure(background=&#39;white&#39;, foreground=&#39;#000000&#39;)
+        app.body.messages_editor.configure(background=&#39;white&#39;, foreground=&#39;#000000&#39;)
+        app.body.entry_editor.configure(background=&#39;white&#39;, foreground=&#39;#000000&#39;)
+
+    else:
+        style.theme_use(&#39;clam&#39;)
+        style.configure(&#39;Treeview&#39;,background=&#39;#333333&#39;,
+                        fieldbackground=&#39;#333333&#39;,
+                        foreground=&#39;#FFFFFF&#39;)
+        style.map(&#39;Treeview&#39;,
+                  background=[(&#34;selected&#34;, &#34;#666699&#34;)],
+                  foreground=[(&#34;selected&#34;, &#34;#FFFFFF&#34;)])
+        app.footer.configure(background=&#39;#333333&#39;)
+        app.body.entry_editor.configure(background=&#39;#333333&#39;, foreground=&#39;#FFFFFF&#39;)
+        app.footer.footer_label.configure(background=&#39;#333333&#39;, foreground=&#39;#FFFFFF&#39;)
+        app.body.messages_editor.configure(background=&#39;#333333&#39;, foreground=&#39;#FFFFFF&#39;)
+        app.footer.entry_editor.configure(background=&#39;#333333&#39;, foreground=&#39;#FFFFFF&#39;)
+        app.body.configure(background = &#39;#333333&#39;)</code></pre>
+</details>
+</dd>
+<dt id="GUI.MainApp.add_contact"><code class="name flex">
+<span>def <span class="ident">add_contact</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>add the input in the entry_editor to the Contacts list and save profile</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_contact(self): 
+    &#34;&#34;&#34;
+    add the input in the entry_editor to the Contacts list and save profile
+    &#34;&#34;&#34;
+    new_contact = self.footer.entry_editor.get(0.0, &#39;end&#39;)
+    self._current_profile._contacts.append(Contact(new_contact.strip()))
+    self._current_profile.save_profile(self._profile_filename)
+    self.body.reset_ui()
+    self.body.set_contacts(self._current_profile.get_contacts())</code></pre>
+</details>
+</dd>
+<dt id="GUI.MainApp.check_new_messages"><code class="name flex">
+<span>def <span class="ident">check_new_messages</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>check whether there is new messages</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_new_messages(self):
+    &#34;&#34;&#34;
+    check whether there is new messages
+    &#34;&#34;&#34;
+    if self._current_profile is None:
+        self.root.after(5000, self.check_new_messages)
+    else:
+        try:
+            debug(&#39;! new message check&#39;)
+            messenger = DirectMessenger(self._current_profile.dsuserver, self._current_profile.username,
+                                        self._current_profile.password)
+            new_msgs = messenger.retrieve_new()
+            for m in new_msgs:
+                self.body.insert_messages(m.message)
+                self._current_profile._contacts[self.body.index].messages.append(m)
+            self._current_profile.save_profile(self._profile_filename)
+
+
+        except TypeError:
+            return None
+        finally:
+            self.root.after(5000, self.check_new_messages)</code></pre>
+</details>
+</dd>
+<dt id="GUI.MainApp.close"><code class="name flex">
+<span>def <span class="ident">close</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Closes the program when the 'Close' menu item is clicked.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def close(self):
+    &#34;&#34;&#34;
+    Closes the program when the &#39;Close&#39; menu item is clicked.
+    &#34;&#34;&#34;
+    self.root.destroy()</code></pre>
+</details>
+</dd>
+<dt id="GUI.MainApp.new_profile"><code class="name flex">
+<span>def <span class="ident">new_profile</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>For creating a new file DSU file</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def new_profile(self):
+    &#34;&#34;&#34;
+    For creating a new file DSU file
+    &#34;&#34;&#34;
+    filename = tk.filedialog.asksaveasfile(filetypes=[(&#39;Distributed Social Profile&#39;, &#39;*.dsu&#39;)])
+    self._profile_filename = filename.name
+    self._current_profile = Profile()
+    self.body.reset_ui()</code></pre>
+</details>
+</dd>
+<dt id="GUI.MainApp.open_profile"><code class="name flex">
+<span>def <span class="ident">open_profile</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Opens an existing DSU file when the 'Open' menu item is clicked and loads the profile
+data into the UI.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def open_profile(self):
+    &#34;&#34;&#34;
+    Opens an existing DSU file when the &#39;Open&#39; menu item is clicked and loads the profile
+    data into the UI.
+    &#34;&#34;&#34;
+    filename = tk.filedialog.askopenfile(filetypes=[(&#39;Distributed Social Profile&#39;, &#39;*.dsu&#39;)])
+    try:
+        self._profile_filename = filename.name
+        self._current_profile = Profile()
+        self._current_profile.load_profile(self._profile_filename)
+
+        self.body.reset_ui()
+        self.body.set_contacts(self._current_profile.get_contacts())
+
+    except DsuFileError as e:
+        print(e)</code></pre>
+</details>
+</dd>
+<dt id="GUI.MainApp.publish"><code class="name flex">
+<span>def <span class="ident">publish</span></span>(<span>self, new_msg: str) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>publish new_msg to the server, return False if failed else True</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def publish(self, new_msg: str) -&gt; bool:
+    &#34;&#34;&#34;
+    publish new_msg to the server, return False if failed else True
+    &#34;&#34;&#34;
+    messenger = DirectMessenger(self._current_profile.dsuserver, self._current_profile.username,
+                                self._current_profile.password)
+    return messenger.send(message=new_msg, recipient=self.body._contacts[self.body.index].recipient)</code></pre>
+</details>
+</dd>
+<dt id="GUI.MainApp.send_message"><code class="name flex">
+<span>def <span class="ident">send_message</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>send the new messages in the entry_editor to display in the screen and to the server</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def send_message(self):
+    &#34;&#34;&#34;
+    send the new messages in the entry_editor to display in the screen and to the server
+    &#34;&#34;&#34;
+    new_msg = self.body.entry_editor.get(0.0, &#39;end&#39;).strip()
+
+    self.body.insert_messages(new_msg, send=True)
+
+    # send message to recipient
+    published = self.publish(new_msg)
+    if not published:
+        self.footer.set_status(&#39;Message not sent to the server&#39;)
+    else:
+        self.footer.set_status(&#39;Message sent&#39;)
+
+    # save the new_msg as DirectMessage to the Profile
+    new_directMessage = DirectMessage(recipient=self.body._contacts[self.body.index].recipient,
+                                      message=new_msg, send=True)
+    self.body._contacts[self.body.index].messages.append(new_directMessage)
+    self._current_profile._contacts = self.body._contacts
+    debug(self._current_profile.get_contacts_name())
+    self._current_profile.save_profile(self._profile_filename)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="GUI.Body" href="#GUI.Body">Body</a></code></h4>
+<ul class="two-column">
+<li><code><a title="GUI.Body.delete_messages" href="#GUI.Body.delete_messages">delete_messages</a></code></li>
+<li><code><a title="GUI.Body.get_messages" href="#GUI.Body.get_messages">get_messages</a></code></li>
+<li><code><a title="GUI.Body.insert_messages" href="#GUI.Body.insert_messages">insert_messages</a></code></li>
+<li><code><a title="GUI.Body.node_select" href="#GUI.Body.node_select">node_select</a></code></li>
+<li><code><a title="GUI.Body.reset_ui" href="#GUI.Body.reset_ui">reset_ui</a></code></li>
+<li><code><a title="GUI.Body.set_contacts" href="#GUI.Body.set_contacts">set_contacts</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="GUI.Footer" href="#GUI.Footer">Footer</a></code></h4>
+<ul class="">
+<li><code><a title="GUI.Footer.add_click" href="#GUI.Footer.add_click">add_click</a></code></li>
+<li><code><a title="GUI.Footer.send_click" href="#GUI.Footer.send_click">send_click</a></code></li>
+<li><code><a title="GUI.Footer.set_status" href="#GUI.Footer.set_status">set_status</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="GUI.MainApp" href="#GUI.MainApp">MainApp</a></code></h4>
+<ul class="two-column">
+<li><code><a title="GUI.MainApp.DM_click" href="#GUI.MainApp.DM_click">DM_click</a></code></li>
+<li><code><a title="GUI.MainApp.add_contact" href="#GUI.MainApp.add_contact">add_contact</a></code></li>
+<li><code><a title="GUI.MainApp.check_new_messages" href="#GUI.MainApp.check_new_messages">check_new_messages</a></code></li>
+<li><code><a title="GUI.MainApp.close" href="#GUI.MainApp.close">close</a></code></li>
+<li><code><a title="GUI.MainApp.new_profile" href="#GUI.MainApp.new_profile">new_profile</a></code></li>
+<li><code><a title="GUI.MainApp.open_profile" href="#GUI.MainApp.open_profile">open_profile</a></code></li>
+<li><code><a title="GUI.MainApp.publish" href="#GUI.MainApp.publish">publish</a></code></li>
+<li><code><a title="GUI.MainApp.send_message" href="#GUI.MainApp.send_message">send_message</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
