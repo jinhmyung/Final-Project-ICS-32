@@ -5,10 +5,6 @@ from tkinter import ttk, filedialog
 from Contact import Contact, Profile, DsuProfileError, DsuFileError
 
 
-def debug(msg):
-    print(msg)
-
-
 class Body(tk.Frame):
     def __init__(self, root, select_callback=None):
         tk.Frame.__init__(self, root)
@@ -66,12 +62,6 @@ class Body(tk.Frame):
         print(self._contacts)
         for i in range(len(self._contacts)):
             self._insert_contacts_tree(id=i, contact=self._contacts[i])
-
-    # def insert_post(self, post: Post):
-    #     # Inserts a single post to the post_tree widget.
-    #     self._contacts.append(post)
-    #     id = len(self._contacts) - 1  # adjust id for 0-base of treeview widget
-    #     self._insert_post_tree(id, post)
 
     def reset_ui(self):
         """
@@ -204,12 +194,9 @@ class MainApp(tk.Frame):
             self.body.reset_ui()
             self.body.set_contacts(self._current_profile.get_contacts())
 
-        # except DsuProfileError as e:
-        #     print(e)
         except DsuFileError as e:
             print(e)
 
-        # debug(self._current_profile.keypair)
 
     def close(self):
         """
@@ -248,7 +235,7 @@ class MainApp(tk.Frame):
                                     self._current_profile.password)
         return messenger.send(message=new_msg, recipient=self.body._contacts[self.body.index].recipient)
 
-    def add_contact(self):  ####Jin
+    def add_contact(self): 
         """
         add the input in the entry_editor to the Contacts list and save profile
         """
@@ -258,7 +245,7 @@ class MainApp(tk.Frame):
         self.body.reset_ui()
         self.body.set_contacts(self._current_profile.get_contacts())
 
-    def check_new_messages(self):  # Li
+    def check_new_messages(self):
         """
         check whether there is new messages
         """
@@ -304,9 +291,7 @@ class MainApp(tk.Frame):
             app.footer.footer_label.configure(background='white', foreground='#000000')
             app.body.messages_editor.configure(background='white', foreground='#000000')
             app.body.entry_editor.configure(background='white', foreground='#000000')
-            # app.body.contacts_tree.configure("Treeview", background = 'white', fieldbackground="white", foreground="white") #doesnt work
-            # ttk.Style(main).configure("Treeview", background="white", fieldbackground="white", foreground="white")
-            # app.body.configure(background = 'white')
+
         else:
             style.theme_use('clam')
             style.configure('Treeview',background='#333333',
@@ -342,9 +327,7 @@ class MainApp(tk.Frame):
         self.body = Body(self.root, self._current_profile)
         self.body.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
 
-        # TODO: Add a callback for detecting changes to the online checkbox widget in the Footer class. Follow
-        # the conventions established by the existing save_callback parameter.
-        # HINT: There may already be a class method that serves as a good callback function!
+
         self.footer = Footer(self.root, send_callback=self.send_message, add_callback=self.add_contact)
         self.footer.pack(fill=tk.BOTH, side=tk.BOTTOM)
 
