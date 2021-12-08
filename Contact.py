@@ -32,7 +32,7 @@ class Contact:
 
 
 class Profile:
-    def __init__(self, dsuserver=None, username=None, password=None):
+    def __init__(self, dsuserver="168.235.86.101", username=None, password=None):
         '''
         This class seeks to initalize variables for the send function
         and assigns attributes to a location
