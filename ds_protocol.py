@@ -1,15 +1,11 @@
 # ds_protocol.py
 
-# Starter code for assignment 3 in ICS 32 Programming with Software Libraries in Python
-
-# Replace the following placeholders with your information.
-
 import json
 from collections import namedtuple
 import time
 
 # Namedtuple to hold the values retrieved from json messages.
-# TODO: update this named tuple to use DSP protocol keys
+
 Response = namedtuple('Response', ['type', 'message', 'messages', 'token'])
 
 
@@ -22,9 +18,7 @@ class DSProtocalException(Exception):
 
 def extract_json(json_msg: str) -> Response:
     '''
-    Call the json.loads function on a json string and convert it to a Response object
-
-    TODO: replace the pseudo placeholder keys with actual DSP protocol keys
+    Calls the json.loads function on a json string and convert it to a Response object
     '''
     try:
         json_obj = json.loads(json_msg)
