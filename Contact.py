@@ -3,9 +3,15 @@ from pathlib import Path
 import json, time, os
 
 class DsuFileError(Exception):
+    """
+    Error is raised when incorrect file is 
+    """
     pass
 
 class DsuProfileError(Exception):
+    """
+    Error is raised when Profile format is incorrect
+    """
     pass
 
 
@@ -24,13 +30,6 @@ class Contact:
         self.recipient = recipient
         self.messages = [] # list of DirectMessages
 
-    # def sort_messages(self):
-    #     """
-    #     sort the messages according to the timestamp
-    #     """
-    #     self.messages.sort(key=lambda DirectMessage: DirectMessage.timestamp)
-
-
 class Profile:
     def __init__(self, dsuserver="168.235.86.101", username=None, password=None):
         '''
@@ -44,9 +43,15 @@ class Profile:
         self._contacts = []  # OPTIONAL
 
     def add_contact(self, contact: Contact) -> None:
+        """
+        function for adding contact to contact list
+        """
         self._contacts.append(contact)
 
     def del_contact(self, index: int) -> bool:
+        """
+        function for deleting contact from the contact list
+        """
         try:
             del self._contacts[index]
             return True
@@ -54,9 +59,15 @@ class Profile:
             return False
 
     def get_contacts(self) -> list:
+        """
+        return contact list
+        """
         return self._contacts
 
     def get_contacts_name(self) -> list:
+        """
+        returns a list of the names in the contact list
+        """
         name = []
         for i in range(len(self._contacts)):
             if self._contacts[i].recipient in name:
