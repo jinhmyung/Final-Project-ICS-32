@@ -1,12 +1,18 @@
 from ds_messenger import DirectMessage, DirectMessenger
-from Profile import Profile, Post
 import tkinter as tk
 from tkinter import ttk, filedialog
 from Contact import Contact, Profile, DsuProfileError, DsuFileError
 
 
 class Body(tk.Frame):
+    """
+    A subclass of tk.Frame that is responsible for drawing all of the widgets
+    in the body portion of the root frame.
+    """
     def __init__(self, root, select_callback=None):
+        """
+        initializes an instance of this class
+        """
         tk.Frame.__init__(self, root)
         self.root = root
         self._select_callback = select_callback
@@ -21,6 +27,9 @@ class Body(tk.Frame):
         self._draw()
 
     def node_select(self, event):
+        """
+        Function for selecting contact in tree widget
+        """
         self.index = int(self.contacts_tree.selection()[0])
         index = self.index
         messages = self._contacts[index].messages  # list of DirectMessages
@@ -52,12 +61,17 @@ class Body(tk.Frame):
         return self.entry_editor.get('1.0', 'end').rstrip()
 
     def delete_messages(self):
+        """
+        For deleting messages
+        """
         self.messages_editor.config(state='normal')
         self.messages_editor.delete(0.0, 'end')
         self.messages_editor.config(state='disable')
 
     def set_contacts(self, contacts: list):
-        # Populates the self._contacts attribute with posts from the active DSU file.
+        """
+        Populates the self._contacts attribute with posts from the active DSU file.
+        """
         self._contacts = contacts
         print(self._contacts)
         for i in range(len(self._contacts)):
@@ -75,6 +89,9 @@ class Body(tk.Frame):
             self.contacts_tree.delete(item)
 
     def _insert_contacts_tree(self, id, contact: Contact):
+        """
+        inserts contacts to contact tree
+        """
         recipient = contact.recipient
         # Since we don't have a title, we will use the first 24 characters of a
         # post entry as the identifier in the post_tree widget.
@@ -83,6 +100,9 @@ class Body(tk.Frame):
         self.contacts_tree.insert('', id, id, text=recipient)
 
     def _draw(self):
+        """
+        For drawing out the body widgets in the GUI
+        """
         contacts_frame = tk.Frame(master=self, width=250)
         contacts_frame.pack(fill=tk.BOTH, side=tk.LEFT)
         self.contacts_tree = ttk.Treeview(contacts_frame, style='Treeview')
@@ -123,6 +143,9 @@ class Body(tk.Frame):
 
 class Footer(tk.Frame):
     def __init__(self, root, send_callback=None, add_callback=None):
+        """
+        initializes the an instace of Footer class
+        """
         tk.Frame.__init__(self, root)
         self.root = root
         self._send_callback = send_callback
@@ -133,17 +156,29 @@ class Footer(tk.Frame):
         # into the Footer instance
 
     def send_click(self):
+        """
+        Called for when the send button is clicked
+        """
         if self._send_callback is not None:
             self._send_callback()
 
     def add_click(self):
+        """
+        Called for when the add button is clicked
+        """
         if self._add_callback is not None:
             self._add_callback()
 
     def set_status(self, message):
+        """
+        Called for changing the label status
+        """
         self.footer_label.configure(text=message)
 
     def _draw(self):
+        """
+        Draws the Footer widget for the GUI
+        """
         entry_frame = tk.Frame(master=self, bg="")
         entry_frame.pack(fill=tk.BOTH, side=tk.LEFT)
         self.entry_editor = tk.Text(entry_frame, width=20, height=2)
@@ -162,7 +197,13 @@ class Footer(tk.Frame):
 
 
 class MainApp(tk.Frame):
+    """
+    Responsible for saving and checking messages
+    """
     def __init__(self, root):
+        """
+        Initializes instance of the MainApp class
+        """
         tk.Frame.__init__(self, root)
         self.root = root
         self._profile_filename = None
@@ -172,13 +213,13 @@ class MainApp(tk.Frame):
 
     def new_profile(self):
         """
-        :return:
+        For creating a new file DSU file
         """
         filename = tk.filedialog.asksaveasfile(filetypes=[('Distributed Social Profile', '*.dsu')])
         self._profile_filename = filename.name
         self._current_profile = Profile()
         self.body.reset_ui()
-        # debug(self._current_profile.keypair)
+
 
     def open_profile(self):
         """
@@ -271,6 +312,9 @@ class MainApp(tk.Frame):
 
 
     def DM_click(self):
+        """
+        Function for when the Darkmode button is clicked. Adjusts the background of the GUI to darkmode
+        """
         if self.dm_mode == False:
             self.dm_mode = True
         else:
@@ -310,7 +354,6 @@ class MainApp(tk.Frame):
     def _draw(self):
         """
         Build a menu and add it to the root frame.
-        :return:
         """
 
         menu_bar = tk.Menu(self.root)
