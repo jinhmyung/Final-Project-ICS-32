@@ -24,11 +24,11 @@ class Contact:
         self.recipient = recipient
         self.messages = [] # list of DirectMessages
 
-    def sort_messages(self):
-        """
-        sort the messages according to the timestamp
-        """
-        self.messages.sort(key=lambda DirectMessage: DirectMessage.timestamp)
+    # def sort_messages(self):
+    #     """
+    #     sort the messages according to the timestamp
+    #     """
+    #     self.messages.sort(key=lambda DirectMessage: DirectMessage.timestamp)
 
 
 class Profile:
@@ -130,7 +130,7 @@ class Profile:
                     for dmsg in c_obj['messages']:
                         c.messages.append(DirectMessage(dmsg['recipient'], dmsg['message'],
                                           dmsg['timestamp'], dmsg['send']))
-                    c.sort_messages()
+                    # c.sort_messages()
                     self._contacts.append(c)
 
                 f.close()

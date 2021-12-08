@@ -107,16 +107,20 @@ class DirectMessenger:
         """
         global PORT
         try:
-            client.settimeout(10.0)
+            client.settimeout(3.0)
             client.connect((self.dsuserver, PORT))
-            client.settimeout(None)
             # debug('ds_client: client connect to {} on {}'.format(server, port))
+        except OSError as e:
+            print(e)
+            return False
         except socket.timeout:
             print('Connection time out, please try again or change the server or the port number')
             client.close()
             return False
         else:
             print('client connected to {} on {}'.format(self.dsuserver, PORT))
+        finally:
+            client.settimeout(None)
 
         try:
             join_message = ds_protocol.to_json("join", self.username, self.password)
@@ -132,6 +136,8 @@ class DirectMessenger:
             print(e)
             client.close()
             return False
+        # except OSError as e:
+        #     print(e)
         return True
 
     def _retrieve(self, command: str = 'all'):

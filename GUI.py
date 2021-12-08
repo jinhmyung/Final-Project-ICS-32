@@ -204,8 +204,8 @@ class MainApp(tk.Frame):
             self.body.reset_ui()
             self.body.set_contacts(self._current_profile.get_contacts())
 
-        except DsuProfileError as e:
-            print(e)
+        # except DsuProfileError as e:
+        #     print(e)
         except DsuFileError as e:
             print(e)
 
