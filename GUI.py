@@ -310,10 +310,10 @@ class MainApp(tk.Frame):
                       background=[("selected", "#666699")],
                       foreground=[("selected", "#FFFFFF")])
             app.footer.configure(background='#333333')
-            app.body.entry_editor.configure(background='#333333')
-            app.footer.footer_label.configure(background='#333333')
-            app.body.messages_editor.configure(background='#333333')
-            app.footer.entry_editor.configure(background='#333333')
+            app.body.entry_editor.configure(background='#333333', foreground='#FFFFFF')
+            app.footer.footer_label.configure(background='#333333', foreground='#FFFFFF')
+            app.body.messages_editor.configure(background='#333333', foreground='#FFFFFF')
+            app.footer.entry_editor.configure(background='#333333', foreground='#FFFFFF')
             app.body.configure(background = '#333333')
 
     def _draw(self):
