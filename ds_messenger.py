@@ -21,15 +21,21 @@ class DirectMessage:
 
     def __init__(self, recipient: str = None, message: str = None,
                  timestamp: float = None, send:bool = False):
+        """
+        initializes instace of Direct Message
+        """
         self.recipient = recipient
         self.message = message
         self.timestamp = timestamp
         self.send = send # is this a message send to this recipient
-
+        
         if self.timestamp is None:
             self.timestamp = time.time()
-
+      
     def __repr__(self):
+        """
+        Changes the representation
+        """
         return f'(recipient={self.recipient}; message={self.message}; timestamp={self.timestamp}; send={self.send})'
 
 
